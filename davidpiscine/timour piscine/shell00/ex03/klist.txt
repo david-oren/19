@@ -1,0 +1,6 @@
+Credentials cache: API:B63F929F-0BFC-4CB8-96C3-F7CDED339999
+        Principal: tpetit@S19.BE
+
+  Issued                Expires               Principal
+Sep  8 07:58:43 2020  Sep  8 17:58:43 2020  krbtgt/S19.BE@S19.BE
+Sep  8 07:58:44 2020  Sep  8 17:58:43 2020  HTTP/san-ssd.s19.be@S19.BE

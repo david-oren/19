@@ -1,0 +1,6 @@
+Credentials cache: API:3D7AEBEB-6EC5-44B1-BC52-7A550AB589B2
+        Principal: doren@S19.BE
+
+  Issued                Expires               Principal
+Sep  7 13:15:13 2020  Sep  7 23:15:13 2020  krbtgt/S19.BE@S19.BE
+Sep  7 13:15:16 2020  Sep  7 23:15:13 2020  HTTP/san-ssd.s19.be@S19.BE

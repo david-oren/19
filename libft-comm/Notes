@@ -1,0 +1,3 @@
+Différence entre char et unsigned char, 
+
+Les unsigned char vont de 0 à 255, alors que char va de -127 à +127 un peu comme les int, la plage est la même mais ça démarre à 0 ou non.
