@@ -1,6 +1,7 @@
 # Libft - 19 2021
 
 Ce tout premier projet a pour objectif de coder en C une librairie de fonctions usuelles que l'on pourra utiliser dans tous les autres projets.
+Petites questions a se poser avant de coder
 Function: -> Objectif
   1. Quelles variables seront utiles et quels parametres
   2. En quoi me permettent elles d'atteindre mon objectif?
