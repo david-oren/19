@@ -192,20 +192,6 @@ So whatever how dire the situation is looking (you failed all your days, exams e
 
 [I made a video on how to make sure that you succeed the entrance exam](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
-### :star: List of Essential Items
-
-> **Towels are extremely useful for cleaning up messes and drying off your body. You can set it on fire as a weapon, chase off enemies, and use it as a distress signal. Life is messy and sometimes dangerous. Space is even messier and more dangerous. Be like Arthur Dent and keep up with your towel** ― *[17 Life Lessons From HITCHHIKER’S GUIDE Hero Arthur Dent](https://nerdist.com/article/hitchhikers-guide-life-lessons-arthur-dent/?amp)*
-
-:sleeping_bed: Mattress or equivalent and Pillow  
-:electric_plug: Phone charger  
-:iphone: Phone  
-:droplet: Toothpaste and Toothbrush  
-:bathtub: Soap and 2-4 Towels  
-:money_mouth_face: Credit Card  
-:heart: Kleenex  
-
-
----
 ## 0x02 ~ Coding simple C programs
 
 > **시작이 반이다** ― *The beginning is half of the way (Korean proverb)* 
