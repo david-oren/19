@@ -1,6 +1,11 @@
 # Libft - 19 2021
 
 Ce tout premier projet a pour objectif de coder en C une librairie de fonctions usuelles que l'on pourra utiliser dans tous les autres projets.
+Function: -> Objectif
+  1. Quelles variables seront utiles et quels parametres
+  2. En quoi me permettent elles d'atteindre mon objectif?
+  3. Fonction -> action repetitive/compliquée/ou rend tout simplement ton code plus lisible
+  4. Cas dangereux -> quel protection dois je mettre ? pourquoi?
 
 ## Partie 1
 Recoder un ensemble de fonctions de la libc telles que décrites dans leur man respectif.
