@@ -6,7 +6,7 @@
 #    By: daoren <daoren@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/15 14:02:55 by daoren            #+#    #+#              #
-#    Updated: 2021/04/13 03:10:43 by daoren           ###   ########.fr        #
+#    Updated: 2021/04/19 19:18:47 by daoren           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,5 +84,9 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+so:    
+    $(CC) -fPIC $(CFLAGS) $(SRCS)
+    gcc -shared -o libft.so $(OBJ)
 
 .PHONY: all clean fclean re bonus

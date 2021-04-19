@@ -6,7 +6,7 @@
 #    By: daoren <daoren@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/04/04 19:22:36 by alelievr          #+#    #+#              #
-#    Updated: 2021/04/12 21:14:46 by daoren           ###   ########.fr        #
+#    Updated: 2021/04/19 19:20:02 by daoren           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 #################
 
 #	Libft Makefile path
-LIBFTDIR	=	../
+LIBFTDIR	=	../libft
 
 #	Sources
 SRCDIR		=	./
