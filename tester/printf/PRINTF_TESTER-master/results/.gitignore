@@ -1,0 +1,6 @@
+# How to push an empty folder on git
+# Ignore everything in this repository
+*
+
+# Except this file
+!.gitignore
