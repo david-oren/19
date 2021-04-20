@@ -6,7 +6,7 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 02:15:18 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/13 02:10:01 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/20 14:29:44 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,8 +254,8 @@ int		main(void)
 	printf("REAL_ATOI = %d\n", atoi("-1"));
 	printf("FT_ATOI = %d\n", ft_atoi("0"));
 	printf("REAL_ATOI = %d\n", atoi("0"));
-	printf("FT_ATOI = %d\n", ft_atoi((char *)0));
-	printf("REAL_ATOI = %d\n", atoi((char *)0));
+	//printf("FT_ATOI = %d\n", ft_atoi((char *)0));
+	//printf("REAL_ATOI = %d\n", atoi((char *)0));
 
 	printf("\nTest (simple compilation/free) de ft_calloc;\n");
 	char *ptr;
