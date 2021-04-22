@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/19 20:19:44 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/22 18:50:36 by daoren           ###   ########.fr       */
+/*   Created: 2021/04/22 17:19:40 by daoren            #+#    #+#             */
+/*   Updated: 2021/04/22 18:33:21 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	ft_return(char **buff, int i, char **line, char **str_save)
 
 int	get_next_line(int fd, char **line)
 {
-	static char	*str_save;
+	static char	*str_save[OPEN_MAX];
 	char		*buff;
 	int			i;
 
@@ -87,7 +87,7 @@ int	get_next_line(int fd, char **line)
 	if (!buff)
 		return (-1);
 	i = 1;
-	while (!ft_backslash_checker(str_save) && i)
+	while (!ft_backslash_checker(str_save[fd]) && i)
 	{
 		i = (int)read(fd, buff, BUFFER_SIZE);
 		if (i < 0)
@@ -96,9 +96,10 @@ int	get_next_line(int fd, char **line)
 			return (-1);
 		}
 		buff[i] = 0;
-		str_save = ft_gnljoin(str_save, buff);
-		if (!str_save)
+		str_save[fd] = ft_gnljoin(str_save[fd], buff);
+		if (!str_save[fd])
 			return (-1);
 	}
-	return (ft_return(&buff, i, line, &str_save));
+	return (ft_return(&buff, i, line, &str_save[fd]));
 }
+
