@@ -6,9 +6,17 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 20:19:44 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/22 18:32:43 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/22 14:17:16 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// Contrainte: Utiliser un seul FD + garder le mm read_size
+//une variable static c'est une variable qui ne se réinitialise pas quand tu rappelle une fonction.
+//buffer: Pour réduire la fragmentation de la mémoire et améliorer les performances d'écriture vers un fichier 
+//plutôt que de mettre en attente de nombreux petits événements individuellement vers l'agent de journalisation de fichier, 
+//les événements peuvent être mis en mémoire tampon par blocs d'une taille spécifiée avant la mise en attente pour écriture. 
+//L'option buffer_size indique la taille maximale que le programme cherche à construire en combinant de plus petits événements en un grand tampon.
+
 
 #include "get_next_line.h"
 
@@ -79,7 +87,7 @@ int	ft_return(char **buff, int i, char **line, char **str_save)
 
 int	get_next_line(int fd, char **line)
 {
-	static char	*str_save[OPEN_MAX];
+	static char	*str_save;
 	char		*buff;
 	int			i;
 
@@ -87,7 +95,7 @@ int	get_next_line(int fd, char **line)
 	if (!buff)
 		return (-1);
 	i = 1;
-	while (!ft_backslash_checker(str_save[fd]) && i)
+	while (!ft_backslash_checker(str_save) && i)
 	{
 		i = (int)read(fd, buff, BUFFER_SIZE);
 		if (i < 0)
@@ -96,9 +104,9 @@ int	get_next_line(int fd, char **line)
 			return (-1);
 		}
 		buff[i] = 0;
-		str_save[fd] = ft_gnljoin(str_save[fd], buff);
-		if (!str_save[fd])
+		str_save = ft_gnljoin(str_save, buff);
+		if (!str_save)
 			return (-1);
 	}
-	return (ft_return(&buff, i, line, &str_save[fd]));
+	return (ft_return(&buff, i, line, &str_save));
 }
