@@ -6,7 +6,7 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 13:25:43 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/22 18:22:22 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/22 18:47:50 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <limits.h>
 
-#define OPEN_MAX 10240
+//#define OPEN_MAX 10240
 
 char	*ft_check_error(int fd, char **line);
 int		ft_backslash_checker(char *str);

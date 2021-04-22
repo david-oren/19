@@ -6,7 +6,94 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:19:31 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/22 17:19:33 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/22 18:48:56 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
+
+size_t	ft_strlen(const char *s)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (s && s[i])
+		i++;
+	return (i);
+}
+
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	char		*new_dst;
+	const char	*new_src;
+	size_t		i;
+
+	if (dst == NULL && src == NULL)
+		return (NULL);
+	new_dst = (char *)dst;
+	new_src = (const char *)src;
+	i = 0;
+	while (i < n)
+	{
+		new_dst[i] = new_src[i];
+		i++;
+	}
+	return (dst);
+}
+
+char	*ft_gnljoin(char const *s1, char const *s2)
+{
+	char	*dest;
+	size_t	size;
+	size_t	i;
+
+	i = -1;
+	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	dest = (char *)malloc(sizeof(char) * size);
+	while (++i < size)
+		dest[i] = 0;
+	if (!dest)
+	{
+		if (s1)
+			free((void *)s1);
+		return (NULL);
+	}
+	ft_memcpy(dest, s1, ft_strlen(s1));
+	ft_memcpy(dest + ft_strlen(s1), s2, ft_strlen(s2));
+	free((void *)s1);
+	return (dest);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*new_s1;
+	int		i;
+
+	i = ft_strlen(s1) + 1;
+	new_s1 = (char *)malloc(sizeof(char) * i);
+	if (!(new_s1))
+		return (0);
+	ft_memcpy(new_s1, s1, i);
+	return (new_s1);
+}
+
+char	*ft_strchr_dup_remix(const char *s, int c)
+{
+	char	*dest;
+	int		i;
+
+	if (!s)
+		return (NULL);
+	i = -1;
+	while (s[++i])
+	{
+		if (s[i] == (char)c)
+		{
+			dest = ft_strdup((char *)(s + i + 1));
+			free((void *)s);
+			return (dest);
+		}
+	}
+	free((void *)s);
+	return (NULL);
+}
