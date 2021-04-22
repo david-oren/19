@@ -5,13 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/22 17:18:44 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/23 00:42:05 by daoren           ###   ########.fr       */
+/*   Created: 2021/04/23 01:33:15 by daoren            #+#    #+#             */
+/*   Updated: 2021/04/23 01:37:16 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <sys/types.h>
 # include <sys/uio.h>

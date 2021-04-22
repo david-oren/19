@@ -5,21 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/22 17:18:44 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/22 18:35:48 by daoren           ###   ########.fr       */
+/*   Created: 2021/04/23 01:33:15 by daoren            #+#    #+#             */
+/*   Updated: 2021/04/23 01:37:16 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
-
-#define OPEN_MAX 10240
 
 char	*ft_check_error(int fd, char **line);
 int		ft_backslash_checker(char *str);

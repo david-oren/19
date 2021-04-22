@@ -6,7 +6,7 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:19:40 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/22 18:33:21 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/23 01:29:37 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,3 @@ int	get_next_line(int fd, char **line)
 	}
 	return (ft_return(&buff, i, line, &str_save[fd]));
 }
-

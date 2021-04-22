@@ -6,11 +6,10 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 20:19:44 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/22 14:17:16 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/23 00:52:57 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Contrainte: Utiliser un seul FD + garder le mm read_size
 //une variable static c'est une variable qui ne se réinitialise pas quand tu rappelle une fonction.
 //buffer: Pour réduire la fragmentation de la mémoire et améliorer les performances d'écriture vers un fichier 
 //plutôt que de mettre en attente de nombreux petits événements individuellement vers l'agent de journalisation de fichier, 
