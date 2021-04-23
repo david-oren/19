@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/22 17:19:31 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/23 17:41:03 by daoren           ###   ########.fr       */
+/*   Created: 2021/04/20 18:56:29 by daoren            #+#    #+#             */
+/*   Updated: 2021/04/23 17:16:47 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
+
+//utile pour gnljoin, strdup.
 
 size_t	ft_strlen(const char *s)
 {
@@ -21,6 +23,8 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
+
+// utile pour gnljoin strdup
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
@@ -40,6 +44,9 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	}
 	return (dst);
 }
+
+
+// utile pour la fct principale get next line qui va permettre de gerer les copies des lignes 
 
 char	*ft_gnljoin(char const *s1, char const *s2)
 {
@@ -64,6 +71,8 @@ char	*ft_gnljoin(char const *s1, char const *s2)
 	return (dest);
 }
 
+// utile pour strchr remix
+
 char	*ft_strdup(const char *s1)
 {
 	char	*new_s1;
@@ -76,6 +85,8 @@ char	*ft_strdup(const char *s1)
 	ft_memcpy(new_s1, s1, i);
 	return (new_s1);
 }
+
+// Une fonction qui va permettre de dupliquer une string a chaque 
 
 char	*ft_strchr_dup_remix(const char *s, int c)
 {

@@ -6,7 +6,7 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 20:19:44 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/23 00:52:57 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/23 16:58:06 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_check_error(int fd, char **line)
 {
 	char	*buff;
 
-	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE < 1 || !line)
+	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE < 1 || !line)		// Buffer_size va etre initialiser a la compilation et reprensente...
 		return (NULL);
 	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
@@ -53,7 +53,7 @@ char	*ft_get_line(char *str)
 	if (!str)
 		return (NULL);
 	size = 0;
-	i = -1;
+	i = -1;									//.......
 	while (str[size] && str[size] != '\n')
 		size++;
 	dest = (char *)malloc(sizeof(char) * (size + 1));
@@ -70,13 +70,13 @@ char	*ft_get_line(char *str)
 	return (dest);
 }
 
-int	ft_return(char **buff, int i, char **line, char **str_save)
+int	ft_return(char **buff, int i, char **line, char **str_save)  // double pointeur...
 {
 	free(*buff);
-	*line = ft_get_line(*str_save);
-	if (!line)
+	*line = ft_get_line(*str_save);								// au pointeur de line on lui donne la valeur de la string via la fct get line
+	if (!line)													// consigne
 		return (-1);
-	*str_save = ft_strchr_dup_remix(*str_save, '\n');
+	*str_save = ft_strchr_dup_remix(*str_save, '\n');			// on met au pointeur de str_save la string qu on aura dupplique avec strchr_dup 
 	if (!*str_save && i != 0)
 		return (-1);
 	if (i)

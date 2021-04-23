@@ -1,45 +1,62 @@
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkravetz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/15 17:43:14 by mkravetz          #+#    #+#             */
+/*   Updated: 2019/12/17 16:58:24 by mkravetz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <fcntl.h>
-#include <unistd.h>
+#include <stdlib.h>
 #include "get_next_line.h"
-#include <string.h>
 
-void	ft_putstr(char *str)
+int		main(int ac, char **av)
 {
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
-	write(1, "\n", 1);
-}
-
-int		main(int argc, char **argv)
-{
-	int		fd;
 	char	*line;
-	int		i;
-	int		ret;
+	int		nb_line;
+	int		fd;
+	int		fd2;
+	int		fd3;
 
-
-	i = 0;
-	ret = 0;
+	if (ac < 3)
+		return (0);
+	nb_line = 1;
+	if ((fd = open(av[1], O_RDONLY)) == -1)
+		printf("le fichier n'existe pas.");
+	if ((fd2 = open(av[2], O_RDONLY)) == -1)
+		printf("le fichier n'existe pas.");
+	if ((fd3 = open(av[3], O_RDONLY)) == -1)
+		printf("le fichier n'existe pas.");
 	line = NULL;
-	(void)argc;
-	fd = open((argv[1]), O_RDONLY);
-
-	while ((ret = get_next_line(fd, &line)) == 1)
+	int ret = 0;
+	while ((ret = get_next_line(fd, &line)) > 0 && nb_line)
 	{
-		printf("\n%s", line);
-		//printf("%d\n", ret);
-		i++;
+		printf("line[%d]: %s\n", nb_line, line);
 		free(line);
+		line = NULL;
+		ret = get_next_line(fd2, &line);
+		printf("line[%d]: %s\n", nb_line, line);
+		free(line);
+		line = NULL;
+		ret = get_next_line(fd3, &line);
+		printf("line[%d]: %s\n", nb_line, line);
+		free(line);
+		nb_line++;
 	}
-	printf("|%d|\n", ret);
-	close(fd);
-	return(0);
+	printf("line[%d]: %s\n", nb_line, line);
+	free(line);
+	line = NULL;
+	ret = get_next_line(fd2, &line);
+	printf("line[%d]: %s\n", nb_line, line);
+	free(line);
+	line = NULL;
+	ret = get_next_line(fd3, &line);
+	printf("line[%d]: %s\n", nb_line, line);
+	free(line);
+	//	system("leaks a.out");
 }
