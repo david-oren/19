@@ -6,11 +6,11 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:19:31 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/22 18:48:56 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/23 05:27:04 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {
