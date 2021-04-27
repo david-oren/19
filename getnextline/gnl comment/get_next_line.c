@@ -6,7 +6,7 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 20:19:44 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/23 16:58:06 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/27 15:39:43 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_check_error(int fd, char **line)
 {
 	char	*buff;
 
-	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE < 1 || !line)		// Buffer_size va etre initialiser a la compilation et reprensente...
+	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE < 1 || !line)
 		return (NULL);
 	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
@@ -73,10 +73,10 @@ char	*ft_get_line(char *str)
 int	ft_return(char **buff, int i, char **line, char **str_save)  // double pointeur...
 {
 	free(*buff);
-	*line = ft_get_line(*str_save);								// au pointeur de line on lui donne la valeur de la string via la fct get line
-	if (!line)													// consigne
+	*line = ft_get_line(*str_save);								// 
+	if (!line)													// 
 		return (-1);
-	*str_save = ft_strchr_dup_remix(*str_save, '\n');			// on met au pointeur de str_save la string qu on aura dupplique avec strchr_dup 
+	*str_save = ft_strchr_dup_remix(*str_save, '\n');			//
 	if (!*str_save && i != 0)
 		return (-1);
 	if (i)
@@ -96,7 +96,7 @@ int	get_next_line(int fd, char **line)
 	i = 1;
 	while (!ft_backslash_checker(str_save) && i)
 	{
-		i = (int)read(fd, buff, BUFFER_SIZE);
+		i = (int)read(fd, buff, BUFFER_SIZE);			// la fonction read va ........
 		if (i < 0)
 		{
 			free(buff);

@@ -6,13 +6,13 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 18:56:29 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/23 17:16:47 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/27 15:40:04 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-//utile pour gnljoin, strdup.
+//utile pour gnljoin, strdup...................
 
 size_t	ft_strlen(const char *s)
 {
@@ -24,7 +24,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-// utile pour gnljoin strdup
+// utile pour gnljoin strdup...........................
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
@@ -46,7 +46,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 }
 
 
-// utile pour la fct principale get next line qui va permettre de gerer les copies des lignes 
+// utile pour la fct principale get next line qui va permettre de gerer les copies des lignes ....................
 
 char	*ft_gnljoin(char const *s1, char const *s2)
 {
@@ -71,7 +71,7 @@ char	*ft_gnljoin(char const *s1, char const *s2)
 	return (dest);
 }
 
-// utile pour strchr remix
+// utile pour strchr remix..............
 
 char	*ft_strdup(const char *s1)
 {
@@ -86,7 +86,7 @@ char	*ft_strdup(const char *s1)
 	return (new_s1);
 }
 
-// Une fonction qui va permettre de dupliquer une string a chaque 
+// Une fonction qui va permettre de dupliquer une string a chaque ..........................
 
 char	*ft_strchr_dup_remix(const char *s, int c)
 {
@@ -101,10 +101,10 @@ char	*ft_strchr_dup_remix(const char *s, int c)
 		if (s[i] == (char)c)
 		{
 			dest = ft_strdup((char *)(s + i + 1));
-			free((void *)s);
+			free((void *)s);		// eviter les leaks
 			return (dest);
 		}
 	}
-	free((void *)s);
+	free((void *)s);		// eviter les leaks.....................
 	return (NULL);
 }
