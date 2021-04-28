@@ -6,7 +6,7 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 14:06:20 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/23 16:42:29 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/28 19:38:29 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_atoi(const char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
-	if ((i >= 19 || return_nb > 1ull << 63) && sign > 0)
+	if ((i >= 19 || return_nb > (1ull << 63) - 1 && sign > 0)
 		return (-1);
 	else if ((i >= 19 || return_nb > 1ull << 63) && sign < 0)
 		return (0);

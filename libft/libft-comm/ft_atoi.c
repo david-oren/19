@@ -6,7 +6,7 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 14:06:20 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/13 15:48:50 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/28 19:39:03 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_atoi(const char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')		// tant que c est un chiffre
 		i++;
-	if ((i >= 19 || return_nb > 1ull << 63) && sign > 0)	// gerer si il y a plus de 19 caractere ou c est un LLmax (ULL = unsigend long long) et que c est + << operateur bitchift
+		if ((i >= 19 || return_nb > (1ull << 63) - 1 && sign > 0)	// gerer si il y a plus de 19 caractere ou c est un LLmax (ULL = unsigend long long) et que c est + << operateur bitchift
 		return (-1);
 	else if ((i >= 19 || return_nb > 1ull << 63) && sign < 0) // gerer si il y a plus de 19 caractere ou c est un LLmin (ULL = unsigend long long) et que c est -
 		return (0);
