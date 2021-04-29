@@ -6,7 +6,7 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 20:19:44 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/29 17:46:40 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/29 17:50:03 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*ft_get_line(char *str)		// elle va permettre de recuperer la ligne qui sui
 	return (dest);			// dest reste a l emplcaement initial return un pointeur vers le debut de la ligne suivante mais comme on travaille avec les tableau on ne doit pas renvoyer le pointeur sur dest
 }
 
-int	ft_return(char **buff, int i, char **line, char **str_save)  // double pointeur...
+int	ft_return(char **buff, int i, char **line, char **str_save)  //ENCORE A FAIRE........................................................
 {
 	free(*buff);
 	*line = ft_get_line(*str_save);								// 
@@ -81,7 +81,7 @@ int	ft_return(char **buff, int i, char **line, char **str_save)  // double point
 	return (0);
 }
 
-int	get_next_line(int fd, char **line) //ENCORE A FAIRE........................................................
+int	get_next_line(int fd, char **line) // ENCORE A FAIRE........................................................
 {
 	static char	*str_save;		// quelle ligne on se situe
 	char		*buff;			// contient le contenu de read donc une ligne ou null si il y a une erreur
