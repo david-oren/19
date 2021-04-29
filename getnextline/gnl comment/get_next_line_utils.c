@@ -6,7 +6,7 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 18:56:29 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/29 16:16:27 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/29 16:26:01 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-// utile pour gnljoin strdup -->
+// utile pour gnljoin strdup
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	char		*new_dst;
