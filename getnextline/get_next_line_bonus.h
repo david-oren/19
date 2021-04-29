@@ -6,7 +6,7 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 01:33:15 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/23 01:37:16 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/29 14:54:51 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+
+#ifndef OPEN_MAX
+# define OPEN_MAX 8192
+#endif
+
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 64
+#endif
 
 char	*ft_check_error(int fd, char **line);
 int		ft_backslash_checker(char *str);

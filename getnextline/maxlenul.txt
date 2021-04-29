@@ -37,3 +37,4 @@ eeq
 
 qw
 heh
+valgrind --leak-check=yes ./a.out
