@@ -6,7 +6,7 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 20:19:44 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/29 17:34:00 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/29 17:46:40 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,19 @@ int	ft_return(char **buff, int i, char **line, char **str_save)  // double point
 	return (0);
 }
 
-int	get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line) //ENCORE A FAIRE........................................................
 {
-	static char	*str_save;
-	char		*buff;
+	static char	*str_save;		// quelle ligne on se situe
+	char		*buff;			// contient le contenu de read donc une ligne ou null si il y a une erreur
 	int			i;
 
 	buff = ft_check_error(fd, line);
 	if (!buff)
-		return (-1);
+		return (-1);			// voir pdf
 	i = 1;
-	while (!ft_backslash_checker(str_save) && i)
+	while (!ft_backslash_checker(str_save) && i)	// on continue la boucle tant qu il reste une ligne et que 
 	{
-		i = (int)read(fd, buff, BUFFER_SIZE);			// la fonction read va ........
+		i = (int)read(fd, buff, BUFFER_SIZE);			// la fonction read va permettre de lire un fichier et s arrete des qu il y a un retour a la ligne et retourne la ligne ou il se trouve
 		if (i < 0)
 		{
 			free(buff);

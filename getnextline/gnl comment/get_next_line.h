@@ -6,7 +6,7 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 13:25:43 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/29 14:54:39 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/29 17:35:31 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <limits.h>
 
-#ifndef OPEN_MAX
+#ifndef OPEN_MAX                // permet d avoir les valeur du open max sur linux et sur mac
 # define OPEN_MAX 8192
 #endif
 
