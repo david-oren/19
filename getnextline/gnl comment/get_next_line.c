@@ -6,7 +6,7 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 20:19:44 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/27 15:39:43 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/29 17:34:00 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,34 +31,30 @@ char	*ft_check_error(int fd, char **line)
 	return (buff);
 }
 
-int	ft_backslash_checker(char *str)
+int	ft_backslash_checker(char *str) // si il existe encore ou non un \n dans le retour de gnljoin
 {
 	int	i;
 
 	if (!str)
 		return (0);
-	i = -1;
+	i = -1;					// car pre incrementation
 	while (str[++i])
 		if (str[i] == '\n')
 			return (1);
 	return (0);
 }
 
-char	*ft_get_line(char *str)
+char	*ft_get_line(char *str)		// elle va permettre de recuperer la ligne qui suit en s arretant soit si on arrive a la fin soit quand on a un \n 
 {
 	char	*dest;
 	size_t	size;
-	size_t	i;
 
 	if (!str)
 		return (NULL);
 	size = 0;
-	i = -1;									//.......
 	while (str[size] && str[size] != '\n')
 		size++;
 	dest = (char *)malloc(sizeof(char) * (size + 1));
-	while (++i < size + 1)
-		dest[i] = 0;
 	if (!dest)
 		return (NULL);
 	size = 0;
@@ -67,7 +63,8 @@ char	*ft_get_line(char *str)
 		dest[size] = str[size];
 		size++;
 	}
-	return (dest);
+	dest[size] = 0;
+	return (dest);			// dest reste a l emplcaement initial return un pointeur vers le debut de la ligne suivante mais comme on travaille avec les tableau on ne doit pas renvoyer le pointeur sur dest
 }
 
 int	ft_return(char **buff, int i, char **line, char **str_save)  // double pointeur...

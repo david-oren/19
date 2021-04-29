@@ -6,7 +6,7 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:19:40 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/23 05:26:07 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/29 17:30:15 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,13 @@ char	*ft_get_line(char *str)
 {
 	char	*dest;
 	size_t	size;
-	size_t	i;
 
 	if (!str)
 		return (NULL);
 	size = 0;
-	i = -1;
 	while (str[size] && str[size] != '\n')
 		size++;
 	dest = (char *)malloc(sizeof(char) * (size + 1));
-	while (++i < size + 1)
-		dest[i] = 0;
 	if (!dest)
 		return (NULL);
 	size = 0;
@@ -60,6 +56,7 @@ char	*ft_get_line(char *str)
 		dest[size] = str[size];
 		size++;
 	}
+	dest[size] = 0;
 	return (dest);
 }
 

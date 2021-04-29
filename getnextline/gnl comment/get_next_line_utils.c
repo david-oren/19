@@ -6,7 +6,7 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 18:56:29 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/29 16:26:01 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/29 17:16:27 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 }
 
 
-// GNLJOIN 
+// GNLJOIN utile pour assembler (concatener) deux string en une nouvelle
 
 char	*ft_gnljoin(char const *s1, char const *s2)
 {
@@ -63,7 +63,7 @@ char	*ft_gnljoin(char const *s1, char const *s2)
 	return (dest);
 }
 
-// utile pour strchr remix..............
+// utile pour strchr remix 
 
 char	*ft_strdup(const char *s1)
 {
@@ -78,7 +78,7 @@ char	*ft_strdup(const char *s1)
 	return (new_s1);
 }
 
-// Une fonction qui va permettre de dupliquer une string a chaque ..........................
+// Une fonction qui va permettre de dupliquer une string a chaque foi qu on rencontre le \n
 
 char	*ft_strchr_dup_remix(const char *s, int c)
 {
@@ -97,6 +97,6 @@ char	*ft_strchr_dup_remix(const char *s, int c)
 			return (dest);
 		}
 	}
-	free((void *)s);		// eviter les leaks.....................
+	free((void *)s);		// eviter les leaks
 	return (NULL);
 }
