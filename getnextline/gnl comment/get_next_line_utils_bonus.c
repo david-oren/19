@@ -6,7 +6,7 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:19:31 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/23 05:27:04 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/29 16:15:07 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	new_dst = (char *)dst;
 	new_src = (const char *)src;
 	i = 0;
-	while (i < n)
+	while (i < n && new_src[i])
 	{
 		new_dst[i] = new_src[i];
 		i++;
 	}
+	new_dst[i] = 0;
 	return (dst);
 }
 
@@ -45,19 +46,11 @@ char	*ft_gnljoin(char const *s1, char const *s2)
 {
 	char	*dest;
 	size_t	size;
-	size_t	i;
 
-	i = -1;
 	size = ft_strlen(s1) + ft_strlen(s2) + 1;
 	dest = (char *)malloc(sizeof(char) * size);
-	while (++i < size)
-		dest[i] = 0;
 	if (!dest)
-	{
-		if (s1)
-			free((void *)s1);
 		return (NULL);
-	}
 	ft_memcpy(dest, s1, ft_strlen(s1));
 	ft_memcpy(dest + ft_strlen(s1), s2, ft_strlen(s2));
 	free((void *)s1);

@@ -6,13 +6,13 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 18:56:29 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/27 15:40:04 by daoren           ###   ########.fr       */
+/*   Updated: 2021/04/29 16:16:27 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-//utile pour gnljoin, strdup...................
+//utile pour gnljoin, strdup
 
 size_t	ft_strlen(const char *s)
 {
@@ -24,50 +24,42 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-// utile pour gnljoin strdup...........................
-
+// utile pour gnljoin strdup -->
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	char		*new_dst;
 	const char	*new_src;
 	size_t		i;
 
-	if (dst == NULL && src == NULL)
+	if (dst == NULL && src == NULL)		//ASK.... pourquoi && et pas ||
 		return (NULL);
-	new_dst = (char *)dst;
-	new_src = (const char *)src;
+	new_dst = (char *)dst;			// memcpy avec void pas de souci pour prendre tout les caracteres non printable donc on cast en char pour
+	new_src = (const char *)src;	// ne prendre que les caractere printale le \0 est deja implementer a ce moment dans dest.
 	i = 0;
-	while (i < n)
+	while (i < n && new_src[i])		// verifie soit on arrive a n soit new source n est pas plus grand que n
 	{
 		new_dst[i] = new_src[i];
 		i++;
 	}
-	return (dst);
+	new_dst[i] = 0;					// on termine dans tout les cas new dest par \0
+	return (dst);			//sert a pointer vers le debut de new_dst
 }
 
 
-// utile pour la fct principale get next line qui va permettre de gerer les copies des lignes ....................
+// GNLJOIN 
 
 char	*ft_gnljoin(char const *s1, char const *s2)
 {
 	char	*dest;
 	size_t	size;
-	size_t	i;
 
-	i = -1;
 	size = ft_strlen(s1) + ft_strlen(s2) + 1;
 	dest = (char *)malloc(sizeof(char) * size);
-	while (++i < size)
-		dest[i] = 0;
 	if (!dest)
-	{
-		if (s1)
-			free((void *)s1);
 		return (NULL);
-	}
 	ft_memcpy(dest, s1, ft_strlen(s1));
-	ft_memcpy(dest + ft_strlen(s1), s2, ft_strlen(s2));
-	free((void *)s1);
+	ft_memcpy(dest + ft_strlen(s1), s2, ft_strlen(s2));		//il conmence au dernier indice de s1
+	free((void *)s1);										// est necessaire pour vider s1 avant la prochaine jointure (voir bug maxlenul)
 	return (dest);
 }
 
