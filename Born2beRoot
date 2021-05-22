@@ -1,0 +1,33 @@
+Ce projet a pour but de vous faire découvrir le merveilleux monde de la virtualisation.
+Vous allez créer votre première machine en respectant des consignes précises et en
+utilisant VirtualBox (ou UTM si VirtualBox ne fonctionne pas sur votre machine). Ainsi,
+à la suite de ce projet, vous serez capable d’installer votre propre système d’exploitation
+implémentant des règles strictes.
+
+Install 
+
+nano monitoring.sh
+Exemple de script:
+
+#!/bin/bash
+var=`lvdisplay`
+
+wall << End_Of_Message
+        #Architecture: `uname -a`
+        #CPU physical : `grep -c ^processor /proc/cpuinfo`
+        #vCPU : `cat /proc/cpuinfo | grep processor | wc -l`
+        `free -m | awk 'NR==2{printf "#Memory Usage: %s/%sMB (%.2f%%)\n", $3,$2,$3*100/$2 }'`
+        `df -h | awk '$NF=="/"{printf "#Disk Usage: %.2f/%dGb (%s)\n", $3,$2,$5}'`
+        #CPU load: `top -bn1 | grep load | awk '{printf "%.1f%%\t\t\n", $(NF-2)}'`
+        #Last boot:`who -b |  cut -d 't' -f 3`
+        #LVM use: `if [ -z "$var" ]
+         then
+                echo "no"
+        else
+                echo "yes"
+        fi`
+        #Connexions TCP :  `sed  </proc/net/tcp '/^ *[0-9]\+: [0-9A-F: ]\{27\} 01 /p;d' | wc -l` ESTABLISHED
+        #User log: `who | cut -d " " -f 1 | sort -u | wc -l`
+        #Network: IP `ip -4 addr show enp0s3 | awk '/inet/ {print $2}' | sed 's#/.*##'` (`cat /sys/class/net/$(ip route show default | awk '/default/ {print $5}')/address`)
+        #Sudo : `grep -o -i COMMAND /var/log/sudo | wc -l` cmd
+End_Of_Message
