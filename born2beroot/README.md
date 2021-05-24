@@ -59,7 +59,7 @@ nano /etc/login.defs
 --> PASS_MAX_DAYS 30
 --> PASS_MIN_DAYS 2
 
-/etc/pam.d/common-password
+nano /etc/pam.d/common-password
 difok=N    Nombre de caractères du nouveau mot de passe qui ne sont pas présents dans l'ancien, par défaut difok=1
 minlen=N    Taille minimum du nouveau mot de passe. Cependant un bonus d'un caractère en plus est rajouté si un type de caractères différent de plus est présent dans le mot de passe.
 dcredit=N    Si dcredit < 0, dcredit est l'opposé du nombre minimum de chiffres dans le nouveau mot de passe, exemple si dcredit = -5, il faut au moins 5 chiffres dans le mot de passe.
