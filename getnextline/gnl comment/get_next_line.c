@@ -91,7 +91,7 @@ int	get_next_line(int fd, char **line) // ENCORE A FAIRE........................
 	if (!buff)
 		return (-1);			// voir pdf
 	i = 1;
-	while (!ft_backslash_checker(str_save) && i)	// on continue la boucle tant qu il reste une ligne et que 
+	while (!ft_backslash_checker(str_save) && i)	// on continue la boucle tant qu il reste une ligne et que on est pas en face d un \n
 	{
 		i = (int)read(fd, buff, BUFFER_SIZE);			// la fonction read va permettre de lire un fichier et s arrete des qu il y a un retour a la ligne et retourne la ligne ou il se trouve
 		if (i < 0)
