@@ -120,6 +120,10 @@ Partion: lsblk
 ufw: ufw status
 groups: groups usernam
 
+Rendu:
+Aller dans le dossier de la vm chercher le hash
+
+
 Source
 https://www.cyberciti.biz/faq/ubuntu-change-hostname-command/
 https://doc.ubuntu-fr.org/useradd
