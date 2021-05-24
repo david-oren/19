@@ -115,6 +115,10 @@ wall << End_Of_Message
         #Sudo : `grep -o -i COMMAND /var/log/sudo | wc -l` cmd
 End_Of_Message
 
+Verification
+Partion: lsblk
+ufw: ufw status
+groups: groups usernam
 
 Source
 https://www.cyberciti.biz/faq/ubuntu-change-hostname-command/
