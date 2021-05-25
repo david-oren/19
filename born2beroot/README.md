@@ -85,7 +85,8 @@ DEFAULT	requiretty --> Le mode TTY sera activé pour des questions de sécurité
 usercheck=N    Si usercheck est différent de 0, vérifie si le mot de passe contient le nom de l'utilisateur $USER. Cette vérification n'est pas effectuée pour les noms d'utilisateur de moins de 3 caractères.
 enforce_for_root Forcer sur le root
 
-
+pour changer de user:
+su - username
 SCRIPT
 
 Creer un fichier monitoring.sh
