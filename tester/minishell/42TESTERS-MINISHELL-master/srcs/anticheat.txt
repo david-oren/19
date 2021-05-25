@@ -1,7 +1,0 @@
-unset PATH
-export LALA=coucou
-echo $LALA
-unset LALA
-env > yours/tmp_cheat.txt
-cd $HOME
-pwd

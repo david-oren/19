@@ -1,7 +1,0 @@
-echolala lol
-; ;
-| |
-echo coucou ; ;
-echo coucou | |
-echo coucou ; echo lala ; ;
-echo coucou | echo lala | |

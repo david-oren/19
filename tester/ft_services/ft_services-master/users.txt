@@ -1,4 +1,0 @@
-FTP: user/password
-MySQL: user/password
-SSH: user/password
-Grafana: admin/password
