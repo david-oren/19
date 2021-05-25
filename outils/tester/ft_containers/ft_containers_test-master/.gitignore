@@ -1,0 +1,4 @@
+*.o
+ft_containers_test
+result.log
+segv_wrapper.out
