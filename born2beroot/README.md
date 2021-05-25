@@ -131,3 +131,64 @@ https://doc.ubuntu-fr.org/useradd
 https://debian-handbook.info/browse/fr-FR/stable/sect.apparmor.html
 https://www.redhat.com/fr/topics/linux/what-is-selinux
 https://doc.ubuntu-fr.org/lvm
+
+
+
+apt-get install sudo
+sudo apt-get update
+sudo apt-get upgrade
+/*-------------------------*/
+#CREATE AN USER | ADD TO GROUP
+
+sudo adduser <user_name>
+sudo groupadd <group_name>
+sudo adduser <user_name> <group_name>
+cat /etc/group
+/*-------------------------*/
+#THE PASSWORDS
+
+man chage
+chage -M 30 <user>
+chage -W 7 <user>
+chage -m 2 <user>
+chage --list <user>
+passwd (change password)
+/*-------------------------*/
+#PASSWORDS COMPLEXITY
+
+sudo apt-get install libpam-cracklib
+man pam_cracklib
+vim /etc/pam.d/commom-passowrd
+minlen=10
+ucredit=-1
+dcredit=-1
+maxrepeat=3
+reject_username
+difok=7
+/*-------------------------*/
+#SUDO CONFIG
+
+man sudoers
+vim /etc/sudoers
+Defaults	badpass_message="<message>"
+/*-------------------------*/
+#INSTALL UFW
+
+sudo apt-get install ufw
+sudo ufw allow 4242
+sudo ufw enable
+sudo ufw delete [rule_nbr]
+sudo ufw status numbered
+/*-------------------------*/
+#INSTALL SSH
+
+sudo apt install openssh-server
+cd /etc/ssh et mettre le port à 4242 et no à login_with_root dans le fichier sshd_config
+sudo ufw allow ssh
+ssh -V
+/*-------------------------*/
+#INSTALL APPARMOR
+
+sudo apt-get install apparmor
+apt-get install apparmor-utils
+sudo apparmor_status
