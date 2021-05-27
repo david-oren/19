@@ -41,3 +41,5 @@ splitB=.split.b.ignore.me
 # Contribute
 I am far from an expert in shell scripting, there's likely better ways to implement it.
 So feel free to pull request, to upgrade and improve this script.
+
+By Lorenuar
