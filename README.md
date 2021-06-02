@@ -4,7 +4,7 @@
 * [outils](outils/)
 * [piscine](piscine/)
 * [libft](libft#libft)
-* [get next line](get_next_line/)
+* [getnextline](getnextline/)
 * [netwhat](netwhat/)
 * [born2beroot](born2beroot/)
 * [printf](printf/)
