@@ -6,9 +6,25 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 18:12:42 by daoren            #+#    #+#             */
-/*   Updated: 2021/06/02 18:15:15 by daoren           ###   ########.fr       */
+/*   Updated: 2021/06/02 19:18:49 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../includes/ft_printf.h"
+
+int		init_struct(t_printf_data *pf_var)
+{
+	if (pf_var->current_str)
+		free(pf_var->current_str);
+	pf_var->current_char = 0;
+	pf_var->current_str = NULL;
+	pf_var->minus = 0;
+	pf_var->dot = 0;
+	pf_var->zero = 0;
+	pf_var->width = 0;
+	pf_var->precision = -1;
+	return (1);
+}
 
 size_t	ft_strlen(const char *s)
 {
@@ -32,6 +48,9 @@ int		is_in_str(char *str, char c)
 			return (1);
 	return (0);
 }
+
+int		ft_pf_atoi(t_printf_data *pr_var, const char *str, int *index)
+
 
 int		ft_stringify(t_printf_data *pf_var)
 {
