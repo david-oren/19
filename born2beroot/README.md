@@ -76,6 +76,76 @@ Terminer le partitionnement et appliquer les changements - OUI
 
 Le systeme de base s'installe
 
+Faut-il analyser un autre CD ou DVD ? - NON
+
+Config. l'outil de gestion des paquets : Belgique
+
+Miroir de l'archive Debian : deb.debian.org
+
+Mandataire HTTP/Proxy : *vide*
+
+Etude statistique : NON
+
+Selection des logiciels : Cocher (avec espace) serveur SSH et utilitaires usuel du système, rien d'autre
+
+Installer le GRUB - Sur le /dev/sda ...
+
+Continuer
+
+__Configuration du bazard__
+------------------------------------
+
+Le système reboot
+
+Entrer votre chouette phrase secrete
+
+login : root - entrer le bon mdp
+
+<blockquote>Si vous vous etes trompé d'utilisateur vous pouvez switch avec la commande su telle que : su - root
+
+Nous serons log en root, les commandes n'auront donc pas besoin de sudo pour fonctionner</blockquote>
+
+* Lancer une maj des paquets : `apt-get update`
+
+* Verifier que le serveur ssh est bien installé : `apt-get install openssh-server`
+
+Configurer dans nano afin que le serveur ssh soit actif uniquement sur le port 4242 : `nano /etc/ssh/sshd_config`
+
+Décommenter (-#) la ligne `#Port 22` et mettre : `Port 4242`
+
+**verif : le sujet dit "on ne doit pas pouvoir se co par SSH avec l'utilisateur Root" et tu indiques :
+#PermitRootLogin prohibit-password --> PermitRootLogin yes or no ?**
+
+Décommenter (-#) la ligne `#PermitRootLogin prohibit-password` et mettre : `PermitRootLogin no`
+
+<blockquote>Sauvegardez bien votre fichier nano sinon vos modifications seront perdues</blockquote>
+
+Relancer la VM avec `reboot`
+
+* Installation du parefeu avec UFW :
+
+Installer ufw : `apt-get install ufw`
+
+Activer le pare-feu : `sudo ufw enable`
+
+Bloquer toutes les connections venant de l'exterieur : `sudo ufw default deny incoming`
+
+Permettre aux applications du serveurs d'avoir acces a l'exterieur :`sudo ufw default allow outgoing`
+
+sudo ufw allow 4242
+Puis pour check
+sudo ufw status
+
+sudo apt-get install ufw
+sudo ufw allow 4242
+sudo ufw enable
+sudo ufw delete [rule_nbr]
+sudo ufw status numbered
+
+
+
+
+
 
 _______________________________________________________________________________________________________________________
 Ce projet a pour but de vous faire découvrir le merveilleux monde de la virtualisation.
