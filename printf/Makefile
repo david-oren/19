@@ -16,7 +16,11 @@
 # **************************************************************************** #
 
 SRCS = \
+	./srcs/utils/ft_printf_utils1.c \
 	./srcs/utils/ft_printf_utils.c \
+	./srcs/utils/ft_printf_utils3.c \
+	./srcs/utils/ft_printf_utils4.c \
+	./srcs/utils/ft_printf_utils2.c \
 	./srcs/convert/convert_c.c \
 	./srcs/convert/convert_u.c \
 	./srcs/convert/convert_di.c \
