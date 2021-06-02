@@ -6,7 +6,7 @@
 /*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 14:06:20 by daoren            #+#    #+#             */
-/*   Updated: 2021/04/28 19:38:29 by daoren           ###   ########.fr       */
+/*   Updated: 2021/06/02 18:17:19 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,3 +46,4 @@ int	ft_atoi(const char *str)
 		return_nb += ft_power_of_10(*(str++) - '0', i--);
 	return (return_nb * sign);
 }
+

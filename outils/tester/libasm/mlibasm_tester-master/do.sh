@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-libasm_path='../'
+libasm_path='../libasm'
 libasm=$libasm_path'libasm.a'
 incl_path=$libasm_path
 

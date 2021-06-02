@@ -21,7 +21,7 @@
 #include "libasm.h"
 
 // # define MAKEITABORT 0
-# define CHECKLEAKS 1
+# define CHECKLEAKS 0
 # define STRCPY_SIZE 30
 
 typedef struct	s_tests

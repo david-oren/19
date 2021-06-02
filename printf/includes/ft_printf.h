@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daoren <daoren@student.42.fr>              +#+  +:+       +#+        */
+/*   By: daoren <daoren@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 13:21:07 by daoren            #+#    #+#             */
-/*   Updated: 2021/06/01 15:49:33 by daoren           ###   ########.fr       */
+/*   Updated: 2021/06/02 16:51:52 by daoren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ typedef struct	s_printf_data
 	int		width;
 	int		precision;
 }				t_printf_data;
-
 
 #endif
