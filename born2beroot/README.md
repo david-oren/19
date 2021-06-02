@@ -1,3 +1,83 @@
+
+Ce projet a pour but de vous faire découvrir le merveilleux monde de la virtualisation.
+
+Vous allez créer votre première machine en respectant des consignes précises et en
+utilisant VirtualBox (ou UTM si VirtualBox ne fonctionne pas sur votre machine). Ainsi,
+à la suite de ce projet, vous serez capable d’installer votre propre système d’exploitation
+implémentant des règles strictes.
+
+
+___Mise en place de votre VM___
+--------------------------------
+* Telecharger la version stable de Debian :
+
+https://www.debian.org/
+
+Elle se presente sous la forme d'une image CD : un .iso que l'on va monter par la suite dans notre machine virtuelle.
+
+* Lancer la machine virtuelle (VM) VirtualBox, déjà installée sur les ordinateurs de 42 normalement:
+
+Bouton New/Nouvelle (Ctrl + N) :
+
+Nom de votre VM - 
+Folder : dans un endroit où vous pouvez utiliser 8Go, si vous êtes à l'école vous allez saturer votre session : mettez la dans le goinffre - 
+Type : Linux - 
+Version : Debian 64bits 	
+
+Quantitée de RAM allouée a la machine virtuelle : 1 ou 2Go sont suffisants
+
+Créer un disque dur virtuel maintenant (taille recommandée : 8Go) - VDI (VirtualBox Disk Image) - Dynamically allocated - Verifiez sa localisation et la taille : 8Go - Creat
+
+Allez dans les settings de votre machine virtuelle
+
+_Onglet STORAGE_ - Controller: IDE : Click sur le petit cd bleu en dessous, dans Attributes cliquer sur le disque bleu a coté d'Optical Drive et monter le .iso de la version de Debian 
+
+_Onglet NETWORK_ -Enable Network Adapter : Bridged Adapter/Acces par pont (chez vous) __OU__ NAT (à 42)
+
+_OK_
+
+* Lancer votre VM 
+
+
+__Installation de Debian__
+------------------------------------
+
+Verifier que le bon iso est utilisé 
+
+<blockquote>Agrandir la fenetre avec l'onglet Video Memory - Virtual Screen : 300%
+
+Pour vous déplacer dans la VM utilisez TAB ou les fleches, afficher le mdp : espace, confirmer : enter </blockquote>
+
+Installation - Langue : comme vous voulez - Pays : Belgique (ou votre localisation) - Clavier : selon le votre (Etats-Unis à 42)
+
+Configurer le réseau - Hostname/Nom de la machine : votrelogin suivi de 42, ex : wil42
+
+Domaine : _rien_
+
+Choisir le mdp pour la partition root & le confirmer
+
+Nom complet nouvel utilisateur : login - Identifiant pour le compteur utilisateur : login - Mdp du nouvel utilisateur : ce que vous voulez
+
+Partitionner les disques : Assisté - utiliser tout un disque avec LVM chiffré
+
+Selectionner le disque dur à partitionner (termine par VBOX HARDDISK)
+
+Partitionner /home séparée - OUI
+
+Choisissez une chouette phrase secrete avec des chiffres, des lettres et des signes de ponctuation
+
+Partitionner les disques : 7.5 GB
+
+<blockquote>Verifier que vous avez bien : Groupe de volumes LVM : un volume logique home, un autre root, un autre swap
+
+Sur votre disque dur : une partition primaire pour le boot et une autre partition logique, chiffrée</blockquote>
+
+Terminer le partitionnement et appliquer les changements - OUI
+
+Le systeme de base s'installe
+
+
+_______________________________________________________________________________________________________________________
 Ce projet a pour but de vous faire découvrir le merveilleux monde de la virtualisation.
 Vous allez créer votre première machine en respectant des consignes précises et en
 utilisant VirtualBox (ou UTM si VirtualBox ne fonctionne pas sur votre machine). Ainsi,
