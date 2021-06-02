@@ -2,8 +2,9 @@
 Ce projet a pour but de vous faire découvrir le merveilleux monde de la virtualisation.
 
 Vous allez créer votre première machine en respectant des consignes précises et en
-utilisant VirtualBox (ou UTM si VirtualBox ne fonctionne pas sur votre machine). Ainsi,
-à la suite de ce projet, vous serez capable d’installer votre propre système d’exploitation
+utilisant VirtualBox (ou UTM si VirtualBox ne fonctionne pas sur votre machine). 
+
+Ainsi, à la suite de ce projet, vous serez capable d’installer votre propre système d’exploitation
 implémentant des règles strictes.
 
 
@@ -41,6 +42,10 @@ _OK_
 
 __Installation de Debian__
 ------------------------------------
+
+Theorie :
+
+<https://doc.ubuntu-fr.org/lvm>
 
 Verifier que le bon iso est utilisé 
 
@@ -92,8 +97,12 @@ Installer le GRUB - Sur le /dev/sda ...
 
 Continuer
 
-__Configuration du bazard__
+__Configuration SSH & UFW__
 ------------------------------------
+
+Pour plus d'infos
+<https://devconnected.com/how-to-install-and-enable-ssh-server-on-debian-10/>
+<https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-20-04-fr#:~:text=Vous%20pouvez%20sp%C3%A9cifier%20des%20plages,ufw%20allow%206000%3A6007%2Ftcp>
 
 Le système reboot
 
@@ -103,7 +112,7 @@ login : root - entrer le bon mdp
 
 <blockquote>Si vous vous etes trompé d'utilisateur vous pouvez switch avec la commande su telle que : su - root
 
-Nous serons log en root, les commandes n'auront donc pas besoin de sudo pour fonctionner</blockquote>
+Nous serons log en root, les commandes suivantes n'auront donc pas besoin de sudo pour fonctionner</blockquote>
 
 * Lancer une maj des paquets : `apt-get update`
 
@@ -126,25 +135,17 @@ Relancer la VM avec `reboot`
 
 Installer ufw : `apt-get install ufw`
 
-Activer le pare-feu : `sudo ufw enable`
+Activer le pare-feu : `ufw enable`
 
-Bloquer toutes les connections venant de l'exterieur : `sudo ufw default deny incoming`
+Bloquer toutes les connections venant de l'exterieur : `ufw default deny incoming`
 
-Permettre aux applications du serveurs d'avoir acces a l'exterieur :`sudo ufw default allow outgoing`
+Permettre aux applications du serveurs d'avoir acces a l'exterieur :`ufw default allow outgoing`
 
-sudo ufw allow 4242
-Puis pour check
-sudo ufw status
+Configurer le pare-feu pour les connexions entrantes sur le port 4242 : `ufw allow 4242`
 
-sudo apt-get install ufw
-sudo ufw allow 4242
-sudo ufw enable
-sudo ufw delete [rule_nbr]
-sudo ufw status numbered
+Verifier que tout est en ordre : `ufw status numbered`
 
-
-
-
+<blockquote>Si une des regles ne vous convient pas : `ufw delete [rule_nbr]`</blockquote>
 
 
 _______________________________________________________________________________________________________________________
