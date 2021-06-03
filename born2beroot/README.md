@@ -151,7 +151,7 @@ Verifier que tout est en ordre : `ufw status numbered`
 
 <blockquote>Si une des regles ne vous convient pas : `ufw delete [rule_nbr]`</blockquote>
 
-__Mise en place de la politique de mdp forte__
+__Mise en place de la politique de mot de passe forte__
 -----------------------------------------------
 
 Plus d'info 
@@ -176,13 +176,25 @@ Et le nombre de jour min entre deux modifications du mdp :
 
 PASS_MIN_DAYS 2
 
+Dans le fichier de configuration :
 
-nano /etc/pam.d/common-password
-difok=N    Nombre de caractères du nouveau mot de passe qui ne sont pas présents dans l'ancien, par défaut difok=1
-minlen=N    Taille minimum du nouveau mot de passe. Cependant un bonus d'un caractère en plus est rajouté si un type de caractères différent de plus est présent dans le mot de passe.
-dcredit=N    Si dcredit < 0, dcredit est l'opposé du nombre minimum de chiffres dans le nouveau mot de passe, exemple si dcredit = -5, il faut au moins 5 chiffres dans le mot de passe.
-ucredit=N    Si ucredit < 0, ucredit est l'opposé du nombre minimum de lettres majuscules dans le nouveau mot de passe, exemple si ucredit = -4, il faut au moins 4 lettres majuscules dans le mot de passe
-maxrepeat=N    Si maxrepeat=N, alors un caractère ne pourra pas être présent plus de N fois
+`nano /etc/pam.d/common-password`
+
+Sur la ligne `password requisite pam_pwquality.so retry=3` ajouter les instructions suivantes :
+
+`difok=7`    Nombre de caractères du nouveau mot de passe qui ne sont pas présents dans l'ancien, par défaut difok=1
+
+`minlen=10`    Taille minimum du nouveau mot de passe. Cependant un bonus d'un caractère en plus est rajouté si un type de caractères différent de plus est présent dans le mot de passe. **?**
+
+`dcredit=-1`    Si dcredit < 0, dcredit est l'opposé du nombre minimum de chiffres dans le nouveau mot de passe, exemple si dcredit = -5, il faut au moins 5 chiffres dans le mot de passe.
+
+`ucredit=-1`    Si ucredit < 0, ucredit est l'opposé du nombre minimum de lettres majuscules dans le nouveau mot de passe, exemple si ucredit = -4, il faut au moins 4 lettres majuscules dans le mot de passe
+
+`maxrepeat=3`    Si maxrepeat=N, alors un caractère ne pourra pas être présent plus de N fois
+
+`reject_username` Verifie que le nom de l'utilisateur n'est pas contenu dans le mot de passe, si oui le mdp est refusé
+
+
 
 
 _______________________________________________________________________________________________________________________
