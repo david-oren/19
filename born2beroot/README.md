@@ -45,6 +45,8 @@ __Installation de Debian__
 
 Theorie :
 
+<https://debian-handbook.info/browse/fr-FR/stable/sect.installation-steps.html>
+
 <https://doc.ubuntu-fr.org/lvm>
 
 Verifier que le bon iso est utilisé 
@@ -101,7 +103,9 @@ __Configuration SSH & UFW__
 ------------------------------------
 
 Pour plus d'infos
+
 <https://devconnected.com/how-to-install-and-enable-ssh-server-on-debian-10/>
+
 <https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-20-04-fr#:~:text=Vous%20pouvez%20sp%C3%A9cifier%20des%20plages,ufw%20allow%206000%3A6007%2Ftcp>
 
 Le système reboot
@@ -146,6 +150,39 @@ Configurer le pare-feu pour les connexions entrantes sur le port 4242 : `ufw all
 Verifier que tout est en ordre : `ufw status numbered`
 
 <blockquote>Si une des regles ne vous convient pas : `ufw delete [rule_nbr]`</blockquote>
+
+__Mise en place de la politique de mdp forte__
+-----------------------------------------------
+
+Plus d'info 
+
+https://www.debian.org/doc/manuals/securing-debian-manual/ch04s11.fr.html
+
+Installer libpam-pwquality et cracklib-runtime (permet de gerer la complexité des mdp) 
+
+**mieux expliquer la fonction de chacune des lib** :
+
+`apt-get -y install libpam-pwquality cracklib-runtime`
+
+Modifier la durée à laquelle les mdp peuvent être changés dans le fichier /etc/login.defs (définit la configuration de la suite shadow password (mots de passe cachés) pour le système.) :
+
+`nano /etc/login.defs`
+
+Dans la section Password aging controls indiquer le nombre de jour max au bout duquel le mdp expirera :
+
+PASS_MAX_DAYS 30
+
+Et le nombre de jour min entre deux modifications du mdp :
+
+PASS_MIN_DAYS 2
+
+
+nano /etc/pam.d/common-password
+difok=N    Nombre de caractères du nouveau mot de passe qui ne sont pas présents dans l'ancien, par défaut difok=1
+minlen=N    Taille minimum du nouveau mot de passe. Cependant un bonus d'un caractère en plus est rajouté si un type de caractères différent de plus est présent dans le mot de passe.
+dcredit=N    Si dcredit < 0, dcredit est l'opposé du nombre minimum de chiffres dans le nouveau mot de passe, exemple si dcredit = -5, il faut au moins 5 chiffres dans le mot de passe.
+ucredit=N    Si ucredit < 0, ucredit est l'opposé du nombre minimum de lettres majuscules dans le nouveau mot de passe, exemple si ucredit = -4, il faut au moins 4 lettres majuscules dans le mot de passe
+maxrepeat=N    Si maxrepeat=N, alors un caractère ne pourra pas être présent plus de N fois
 
 
 _______________________________________________________________________________________________________________________
