@@ -1,3 +1,6 @@
+# Born2beRoot
+
+</br>
 
 Ce projet a pour but de vous faire découvrir le merveilleux monde de la virtualisation.
 
@@ -7,15 +10,19 @@ utilisant VirtualBox (ou UTM si VirtualBox ne fonctionne pas sur votre machine).
 Ainsi, à la suite de ce projet, vous serez capable d’installer votre propre système d’exploitation
 implémentant des règles strictes.
 
+</br>
 
 ___Mise en place de votre VM___
 --------------------------------
-* Telecharger la version stable de Debian :
 
-https://www.debian.org/
+</br>
+
+* Telecharger la version stable de [Debian](https://www.debian.org/)
 
 Elle se presente sous la forme d'une image CD : un .iso que l'on va monter par la suite dans notre machine virtuelle.
-
+  
+</br>
+  
 * Lancer la machine virtuelle (VM) VirtualBox, déjà installée sur les ordinateurs de 42 normalement:
 
 Bouton New/Nouvelle (Ctrl + N) :
@@ -37,17 +44,19 @@ _Onglet NETWORK_ -Enable Network Adapter : Bridged Adapter/Acces par pont (chez 
 
 _OK_
 
+</br>
+
 * Lancer votre VM 
 
+</br>
 
 __Installation de Debian__
 ------------------------------------
 
-Theorie :
+*Plus d'infos sur [Debian-handbook](https://debian-handbook.info/browse/fr-FR/stable/sect.installation-steps.html) et 
+[Doc.Ubuntu](https://doc.ubuntu-fr.org/lvm)*
 
-<https://debian-handbook.info/browse/fr-FR/stable/sect.installation-steps.html>
-
-<https://doc.ubuntu-fr.org/lvm>
+</br>
 
 Verifier que le bon iso est utilisé 
 
@@ -99,20 +108,21 @@ Installer le GRUB - Sur le /dev/sda ...
 
 Continuer
 
+</br>
+
 __Configuration SSH & UFW__
 ------------------------------------
 
-Pour plus d'infos
+*Plus d'infos sur l'installation du serveur SSH sur Debian sur [Devconnected](https://devconnected.com/how-to-install-and-enable-ssh-server-on-debian-10/) et
+l'installation d'UFW et mise en place du pare-feu sur [Digitalocean](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-20-04-fr#:~:text=Vous%20pouvez%20sp%C3%A9cifier%20des%20plages,ufw%20allow%206000%3A6007%2Ftcp)*
 
-<https://devconnected.com/how-to-install-and-enable-ssh-server-on-debian-10/>
-
-<https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-20-04-fr#:~:text=Vous%20pouvez%20sp%C3%A9cifier%20des%20plages,ufw%20allow%206000%3A6007%2Ftcp>
+</br>
 
 Le système reboot
 
 Entrer votre chouette phrase secrete
 
-login : root - entrer le bon mdp
+Login : root - entrer le bon mdp
 
 <blockquote>Si vous vous etes trompé d'utilisateur vous pouvez switch avec la commande su telle que : su - root
 
@@ -131,7 +141,7 @@ Décommenter (-#) la ligne `#Port 22` et mettre : `Port 4242`
 
 Décommenter (-#) la ligne `#PermitRootLogin prohibit-password` et mettre : `PermitRootLogin no`
 
-<blockquote>Sauvegardez bien votre fichier nano sinon vos modifications seront perdues</blockquote>
+<blockquote>Sauvegardez (Ecrire) bien votre fichier nano sinon vos modifications seront perdues</blockquote>
 
 Relancer la VM avec `reboot`
 
@@ -151,12 +161,14 @@ Verifier que tout est en ordre : `ufw status numbered`
 
 <blockquote>Si une des regles ne vous convient pas : `ufw delete [rule_nbr]`</blockquote>
 
+</br>
+
 __Mise en place de la politique de mot de passe forte__
 -----------------------------------------------
 
-Plus d'info 
+*Plus d'info sur l'autentification d'utilisateur avec PAM sur [Debian.org](https://www.debian.org/doc/manuals/securing-debian-manual/ch04s11.fr.html)
 
-https://www.debian.org/doc/manuals/securing-debian-manual/ch04s11.fr.html
+</br>
 
 Installer libpam-pwquality et cracklib-runtime (permet de gerer la complexité des mdp) 
 
@@ -195,7 +207,7 @@ Sur la ligne `password requisite pam_pwquality.so retry=3` ajouter les instructi
 `reject_username` Verifie que le nom de l'utilisateur n'est pas contenu dans le mot de passe, si oui le mdp est refusé
 
 
-
+</br></br></br>
 
 _______________________________________________________________________________________________________________________
 Ce projet a pour but de vous faire découvrir le merveilleux monde de la virtualisation.
