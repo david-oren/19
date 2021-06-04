@@ -28,7 +28,7 @@ Elle se presente sous la forme d'une image CD : un .iso que l'on va monter par l
 Bouton New/Nouvelle (Ctrl + N) :
 
 Nom de votre VM - 
-Folder : dans un endroit où vous pouvez utiliser 8Go, si vous êtes à l'école vous allez saturer votre session : mettez la dans le goinffre - 
+Folder : dans un endroit où vous pouvez utiliser 8Go, si vous êtes à l'école vous allez saturer votre session : vous pouvez travailler de maniere temporaire dans le goinfre mais sachez que celui-ci est souvent vidé, pensez donc à exporter votre VM pour ne pas avoir de mauvaise surprise - 
 Type : Linux - 
 Version : Debian 64bits 	
 
