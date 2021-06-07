@@ -21,7 +21,7 @@ ___Mise en place de votre VM___
 
 Elle se presente sous la forme d'une image CD : un .iso que l'on va monter par la suite dans notre machine virtuelle.
 
-Si vous souhaitez faire les bonus vous pouvez suivre cette installation ci, faites par [hanshazairi](https://github.sre.pub/hanshazairi/42-born2beroot/blob/main/README.md) : https://www.youtube.com/watch?v=2w-2MX5QrQw
+Si vous souhaitez faire les bonus vous pouvez suivre cette installation ci, faites par [hanshazairi](https://github.sre.pub/hanshazairi/42-born2beroot/blob/main/README.md) : [ici](https://www.youtube.com/watch?v=2w-2MX5QrQw)
 
 </br>
   
@@ -30,7 +30,10 @@ Si vous souhaitez faire les bonus vous pouvez suivre cette installation ci, fait
 Bouton New/Nouvelle (Ctrl + N) :
 
 Nom de votre VM - 
-Folder : dans un endroit où vous pouvez utiliser 8Go, si vous êtes à l'école vous allez saturer votre session : vous pouvez travailler de maniere temporaire dans le goinfre mais sachez que celui-ci est souvent vidé, pensez donc à exporter votre VM pour ne pas avoir de mauvaise surprise - 
+Folder : dans un endroit où vous pouvez utiliser 8Go.
+
+<blockquote>Si vous êtes à 19 vous allez saturer votre session : vous pouvez travailler de maniere temporaire dans le goinfre mais sachez que celui-ci est souvent vidé, pensez donc à exporter votre VM pour ne pas avoir de mauvaise surprise</blockquote>
+
 Type : Linux - 
 Version : Debian 64bits 	
 
@@ -114,6 +117,73 @@ Continuer
 
 __SUDO__
 -----------------------------------------------
+
+*Plus d'infos sur Sudo sur [Wiki.Debian](https://wiki.debian.org/fr/sudo)*
+
+**Installation**
+
+
+Installer Sudo : `apt install sudo`
+
+Verifier que Sudo est bien installé : `dpkg -l | grep sudo`
+
+**Ajout d'un utilisateur**
+
+Ajouter un utilisateur au groupe sudo (cet utilisateur pourra donc utiliser la commande sudo) : `adduser <username> sudo`
+
+Verifier les utilisateurs du groupe sudo : `getent group sudo`
+
+Relancer la VM avec `reboot` pour que les changements prenent effet
+
+Vérifier qui a bien les droits sudo avec la commande `sudo -v`
+
+**Configuration de Sudo**
+
+
+<blockquote>Tous les fichiers du répertoire /etc/sudoers.d/ ne finissant pas par ~ ou ne contenant pas un . sont lus et analysés lorsque l'on utilise la commande sudo.
+
+Pour modifier le fonctionnement de la commande sudo, l'administrateur du système ne modifie plus le fichier /etc/sudoers mais positionne des fichiers de personnalisation dans le répertoire /etc/sudoers.d.
+
+Source : [Wiki Ubuntu-fr](https://doc.ubuntu-fr.org/sudoers)</blockquote>
+
+Créer un nouveau fichier pour configurer sudo avec `nano /etc/sudoers.d/<filename>`
+
+Ajouter les commandes suivantes :
+
+Pour limiter les tentatives d'authentification à 3 dans le cas d'un mdp incorrecte :
+
+```
+Defaults        passwd_tries=3
+```
+
+Pour ajouter un message d'erreur personnalisé :
+
+```
+Defaults        badpass_message="<custom-error-message>"
+```
+
+Enregistrer l'activité des sudoers dans un fichier de log spécifique :
+
+```
+Defaults        log_host, log_year, logfile="/var/log/sudo/<filename>"
+```
+
+Pour archiver toutes les input/output de sudo dans /var/log/sudo/ :
+
+```
+Defaults        log_input,log_output
+Defaults        iolog_dir="/var/log/sudo"
+```
+Pour forcer à ce que le sudoers ne puisse pas agir ailleurs qu'en mode console :
+
+```
+Defaults        requiretty
+```
+Pour restreindre les path utilisés par sudo :
+
+```
+Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
+```
 
 
 __Configuration SSH & UFW__
