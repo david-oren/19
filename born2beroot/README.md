@@ -20,7 +20,9 @@ ___Mise en place de votre VM___
 * Telecharger la version stable de [Debian](https://www.debian.org/)
 
 Elle se presente sous la forme d'une image CD : un .iso que l'on va monter par la suite dans notre machine virtuelle.
-  
+
+Si vous souhaitez faire les bonus vous pouvez suivre cette installation ci, faites par [hanshazairi](https://github.sre.pub/hanshazairi/42-born2beroot/blob/main/README.md) : https://www.youtube.com/watch?v=2w-2MX5QrQw
+
 </br>
   
 * Lancer la machine virtuelle (VM) VirtualBox, déjà installée sur les ordinateurs de 42 normalement:
@@ -110,6 +112,10 @@ Continuer
 
 </br>
 
+__SUDO__
+-----------------------------------------------
+
+
 __Configuration SSH & UFW__
 ------------------------------------
 
@@ -166,13 +172,11 @@ Verifier que tout est en ordre : `ufw status numbered`
 __Mise en place de la politique de mot de passe forte__
 -----------------------------------------------
 
-*Plus d'info sur l'autentification d'utilisateur avec PAM sur [Debian.org](https://www.debian.org/doc/manuals/securing-debian-manual/ch04s11.fr.html)
+*Plus d'info sur l'autentification d'utilisateur avec PAM sur [Debian.org](https://www.debian.org/doc/manuals/securing-debian-manual/ch04s11.fr.html) et [Systutorials.com](https://www.systutorials.com/docs/linux/man/5-pwquality.conf/)*
 
 </br>
 
 Installer libpam-pwquality et cracklib-runtime (permet de gerer la complexité des mdp) 
-
-**mieux expliquer la fonction de chacune des lib** :
 
 `apt-get -y install libpam-pwquality cracklib-runtime`
 
@@ -205,6 +209,58 @@ Sur la ligne `password requisite pam_pwquality.so retry=3` ajouter les instructi
 `maxrepeat=3`    Si maxrepeat=N, alors un caractère ne pourra pas être présent plus de N fois
 
 `reject_username` Verifie que le nom de l'utilisateur n'est pas contenu dans le mot de passe, si oui le mdp est refusé
+
+`enforce_for_root` Pour que ces restrictions prenent effet aussi sur root
+
+Au final votre ligne ressemblera à :
+
+```password        requisite                       pam_pwquality.so retry=3 minlen=10 ucredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root```
+
+Sur la ligne du dessous, apres pam_unix.so rajouter `remember=1` pour garder en memoire le dernier mot de passe utilisé et pouvoir le comparer lors de la creation d'un nouveau mdp.
+
+
+Creer un nouvel utilisateur :
+--
+
+Créer un nouvel utilisateur : `adduser <username>`
+
+Verifier qu'il a bien ete créer avec `getent passwd <username>`
+
+Verifier le temps de validité des mots de passe grace à `sudo chage -l <username>`
+
+Créer un nouveau groupe :
+--
+
+Créer un nouveau groupe nommé `user42`
+
+Ajouter votre nouveau membre à ce groupe avec `adduser <username> user42`
+
+Verifier aue l'user a bien ete ajouté au groupe user 42 avec `getent group user42`
+
+</br>
+
+__CRON__
+-----------------------------------------------
+
+*Plus d'info sur la configuration de Cron sur [Fedora-fr.org](https://doc.fedora-fr.org/wiki/CRON_:_Configuration_de_t%C3%A2ches_automatis%C3%A9es#:~:text=La%20configuration%20de%20cron%20se,via%20la%20commande%20crontab%20%2De.)*
+
+Ouvrir le fichier crontab avec `crontab -e`, choisir Nano
+
+Remplacer la ligne 
+```
+m h  dom mon dow   command
+``` 
+par 
+
+```
+*/10 * * * * sh /path/to/script
+```
+
+Votre script s'activera alors toutes les 10min.
+
+</br>
+
+
 
 
 </br></br></br>
@@ -316,8 +372,7 @@ wall << End_Of_Message
         `df -h | awk '$NF=="/"{printf "#Disk Usage: %.2f/%dGb (%s)\n", $3,$2,$5}'`
         #CPU load: `top -bn1 | grep load | awk '{printf "%.1f%%\t\t\n", $(NF-2)}'`
         #Last boot:`who -b |  cut -d 't' -f 3`
-        #LVM use: `if [ -z "$var" ]
-         then
+        #LVM use: `if [ -z "$var" ]; then
                 echo "no"
         else
                 echo "yes"
