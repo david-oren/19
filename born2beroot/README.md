@@ -320,25 +320,27 @@ Créer un nouveau groupe nommé `user42`
 
 Ajouter votre nouveau membre à ce groupe avec `adduser <username> user42`
 
-Verifier aue l'user a bien ete ajouté au groupe user 42 avec `getent group user42`
+Verifier que l'user a bien ete ajouté au groupe user 42 avec `getent group user42`
 
 </br></br>
 
 __AppArmor__
 --
 
-*Plus d'infos sur [Debian-Handbook](https://debian-handbook.info/browse/fr-FR/stable/sect.apparmor.html)*
+*Plus d'infos sur AppArmor : [Debian-Handbook](https://debian-handbook.info/browse/fr-FR/stable/sect.apparmor.html) et SELinux : [Debian-Handbook](https://debian-handbook.info/browse/fr-FR/stable/sect.selinux.html)*
 
 Normalement installé par défaut, vous pouvez le télécharger avec `apt install apparmor`
 
 Completer l'installation avec `apt install apparmor-utils`
 
 Vérifier que le module apparmor fonctionne avec `/usr/sbin/aa-status` ou `apparmor_status`
+</br>
 
 __SCRIPT__
 --
 
-*Plus d'infos sur le shell sur [Doc-Ubuntu](https://doc.ubuntu-fr.org/projets/ecole/scripting/initiation_au_shell), allez checker le man de uname, de lscpu, de awk
+*Plus d'infos sur le shell sur [Doc-Ubuntu](https://doc.ubuntu-fr.org/projets/ecole/scripting/initiation_au_shell), allez checker le man pour uname, lscpu, awk ... vous pouvez aussi cat les différents fichiers /proc pour voir ce qui vous interesse dans leur contenu*
+
 Créer un fichier monitoring.sh
 
 nano monitoring.sh
@@ -380,6 +382,7 @@ wall << End_Of_Message
     else
       echo "no"
     fi`
+    
     `awk '$4=="01" {count++} END{printf "#Connexions TCP : %d ESTABLISHED\n", count}' /proc/net/tcp`
 
     #User log: `who | awk '{print $1}' | uniq | wc -l`
@@ -427,7 +430,8 @@ https://debian-handbook.info/browse/fr-FR/stable/sect.apparmor.html
 https://www.redhat.com/fr/topics/linux/what-is-selinux
 
 https://doc.ubuntu-fr.org/lvm
-</br></br></br>
+
+</br></br></br></br></br></br></br></br></br></br></br></br>
 _______________________________________________________________________________________________________________________
 Ce projet a pour but de vous faire découvrir le merveilleux monde de la virtualisation.
 Vous allez créer votre première machine en respectant des consignes précises et en
