@@ -113,7 +113,7 @@ Installer le GRUB - Sur le /dev/sda ...
 
 Continuer
 
-</br>
+</br></br>
 
 __SUDO__
 -----------------------------------------------
@@ -184,7 +184,7 @@ Pour restreindre les path utilisés par sudo :
 ```
 Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
 ```
-
+</br></br>
 
 __Configuration SSH & UFW__
 ------------------------------------
@@ -194,9 +194,9 @@ l'installation d'UFW et mise en place du pare-feu sur [Digitalocean](https://www
 
 </br>
 
-Le système reboot
+**Installation et parametrage SSH**
 
-Entrer votre chouette phrase secrete
+Entrer votre phrase secrete
 
 Login : root - entrer le bon mdp
 
@@ -212,16 +212,31 @@ Configurer dans nano afin que le serveur ssh soit actif uniquement sur le port 4
 
 Décommenter (-#) la ligne `#Port 22` et mettre : `Port 4242`
 
-**verif : le sujet dit "on ne doit pas pouvoir se co par SSH avec l'utilisateur Root" et tu indiques :
-#PermitRootLogin prohibit-password --> PermitRootLogin yes or no ?**
-
 Décommenter (-#) la ligne `#PermitRootLogin prohibit-password` et mettre : `PermitRootLogin no`
+
+Sortir du fichier avec Ctrl + X
 
 <blockquote>Sauvegardez (Ecrire) bien votre fichier nano sinon vos modifications seront perdues</blockquote>
 
+Verifier le status SSH avec `service ssh status`
+
 Relancer la VM avec `reboot`
 
-* Installation du parefeu avec UFW :
+</br>
+
+**Se connecter du terminal de votre ordi via SSH**
+
+Connaitre son IP : `ip a` 
+
+Ce qui se trouve après inet dans la partie 2
+
+Se connecter à votre VM via le port 4242 avec `ssh <username>@<ip-adress> -p 4242`
+
+Pour sortir de la session : `logout`
+
+</br>
+
+**Installation du parefeu avec UFW**
 
 Installer ufw : `apt-get install ufw`
 
@@ -237,7 +252,7 @@ Verifier que tout est en ordre : `ufw status numbered`
 
 <blockquote>Si une des regles ne vous convient pas : `ufw delete [rule_nbr]`</blockquote>
 
-</br>
+</br></br>
 
 __Mise en place de la politique de mot de passe forte__
 -----------------------------------------------
@@ -256,11 +271,11 @@ Modifier la durée à laquelle les mdp peuvent être changés dans le fichier /e
 
 Dans la section Password aging controls indiquer le nombre de jour max au bout duquel le mdp expirera :
 
-PASS_MAX_DAYS 30
+`PASS_MAX_DAYS 30`
 
 Et le nombre de jour min entre deux modifications du mdp :
 
-PASS_MIN_DAYS 2
+`PASS_MIN_DAYS 2`
 
 Dans le fichier de configuration :
 
@@ -289,7 +304,7 @@ Au final votre ligne ressemblera à :
 Sur la ligne du dessous, apres pam_unix.so rajouter `remember=1` pour garder en memoire le dernier mot de passe utilisé et pouvoir le comparer lors de la creation d'un nouveau mdp.
 
 
-Creer un nouvel utilisateur :
+Créer un nouvel utilisateur :
 --
 
 Créer un nouvel utilisateur : `adduser <username>`
@@ -307,12 +322,82 @@ Ajouter votre nouveau membre à ce groupe avec `adduser <username> user42`
 
 Verifier aue l'user a bien ete ajouté au groupe user 42 avec `getent group user42`
 
-</br>
+</br></br>
+
+__AppArmor__
+--
+
+*Plus d'infos sur [Debian-Handbook](https://debian-handbook.info/browse/fr-FR/stable/sect.apparmor.html)*
+
+Normalement installé par défaut, vous pouvez le télécharger avec `apt install apparmor`
+
+Completer l'installation avec `apt install apparmor-utils`
+
+Vérifier que le module apparmor fonctionne avec `/usr/sbin/aa-status` ou `apparmor_status`
+
+__SCRIPT__
+--
+
+*Plus d'infos sur le shell sur [Doc-Ubuntu](https://doc.ubuntu-fr.org/projets/ecole/scripting/initiation_au_shell), allez checker le man de uname, de lscpu, de awk
+Créer un fichier monitoring.sh
+
+nano monitoring.sh
+
+Exemple de script:
+
+```
+#!/bin/bash
+
+
+MEMTOTAL=$(awk '/MemTotal/ {print $2}' /proc/meminfo)
+
+MEMAVAIL=$(awk '/MemAvail/ {print $2}' /proc/meminfo)
+
+MEMUSED=$((MEMTOTAL - MEMAVAIL))
+
+LVM=$(lsblk | awk '/root/ {print $6}')
+
+
+wall << End_Of_Message
+	
+    #Architecture: `uname -a`
+
+    #CPU physical: `lscpu | awk '/^CPU\(s\)/ {print $2}'`
+
+    #vCPU : `grep -c 'processor' /proc/cpuinfo`
+
+    `echo $MEMUSED $MEMTOTAL | awk '{printf "#Memory Usage: %d/%dMB (%.2f%%)\n", ($1/1024), ($2/1024), ($1/$2)*100}'`
+
+    `df --total | tail -n 1 | awk '{printf "#Disk Usage: %d/%dGb (%d%%)\n", ($3/1024), ($2/1048576), $5}'`
+
+    `awk '{print "#CPU load: "$1"%\n"}' /proc/loadavg`
+
+    #Last boot: `who -b | awk '{print $3" "$4}'`
+
+    #LVM use: `if [ "$LVM" = "lvm" ];
+    then
+      echo "yes"
+    else
+      echo "no"
+    fi`
+    `awk '$4=="01" {count++} END{printf "#Connexions TCP : %d ESTABLISHED\n", count}' /proc/net/tcp`
+
+    #User log: `who | awk '{print $1}' | uniq | wc -l`
+
+    `ip -br a show $(ip route show default | awk '{print $5}') | sed 's/\/[[:digit:]]\{1,3\}//g' | awk '{printf "#Network: IP %s (%s)\n", $3, $4}'`
+
+    `grep -c 'COMMAND' /var/log/sudo/sudo.log | awk '{printf "#Sudo : %d cmd\n", $1}'`
+
+End_Of_Message
+```
+</br></br>
 
 __CRON__
 -----------------------------------------------
 
 *Plus d'info sur la configuration de Cron sur [Fedora-fr.org](https://doc.fedora-fr.org/wiki/CRON_:_Configuration_de_t%C3%A2ches_automatis%C3%A9es#:~:text=La%20configuration%20de%20cron%20se,via%20la%20commande%20crontab%20%2De.)*
+
+</br>
 
 Ouvrir le fichier crontab avec `crontab -e`, choisir Nano
 
@@ -328,13 +413,21 @@ par
 
 Votre script s'activera alors toutes les 10min.
 
-</br>
-
-
-
+</br></br>
 
 </br></br></br>
+__Sources__
+----
+https://www.cyberciti.biz/faq/ubuntu-change-hostname-command/
 
+https://doc.ubuntu-fr.org/useradd
+
+https://debian-handbook.info/browse/fr-FR/stable/sect.apparmor.html
+
+https://www.redhat.com/fr/topics/linux/what-is-selinux
+
+https://doc.ubuntu-fr.org/lvm
+</br></br></br>
 _______________________________________________________________________________________________________________________
 Ce projet a pour but de vous faire découvrir le merveilleux monde de la virtualisation.
 Vous allez créer votre première machine en respectant des consignes précises et en
