@@ -17,15 +17,15 @@ ___Mise en place de votre VM___
 
 </br>
 
-* Telecharger la version stable de [Debian](https://www.debian.org/)
+* Téléchargez la version stable de [Debian](https://www.debian.org/)
 
-Elle se presente sous la forme d'une image CD : un .iso que l'on va monter par la suite dans notre machine virtuelle.
+Elle se présente sous la forme d'une image CD : un .iso que l'on va monter par la suite dans notre machine virtuelle.
 
 Si vous souhaitez faire les bonus vous pouvez suivre cette installation ci, faites par [hanshazairi](https://github.sre.pub/hanshazairi/42-born2beroot/blob/main/README.md) : [ici](https://www.youtube.com/watch?v=2w-2MX5QrQw)
 
 </br>
   
-* Lancer la machine virtuelle (VM) VirtualBox, déjà installée sur les ordinateurs de 42 normalement:
+* Lancez la machine virtuelle (VM) VirtualBox, déjà installée sur les ordinateurs de 42 normalement:
 
 Bouton New/Nouvelle (Ctrl + N) :
 
@@ -37,9 +37,9 @@ Folder : dans un endroit où vous pouvez utiliser 8Go.
 Type : Linux - 
 Version : Debian 64bits 	
 
-Quantitée de RAM allouée a la machine virtuelle : 1 ou 2Go sont suffisants
+Quantitée de RAM allouée à la machine virtuelle : 1 ou 2Go sont suffisants
 
-Créer un disque dur virtuel maintenant (taille recommandée : 8Go) - VDI (VirtualBox Disk Image) - Dynamically allocated - Verifiez sa localisation et la taille : 8Go - Creat
+Créez un disque dur virtuel maintenant (taille recommandée : 8Go) - VDI (VirtualBox Disk Image) - Dynamically allocated - Vérifiez sa localisation et la taille : 8Go - Creat
 
 Allez dans les settings de votre machine virtuelle
 
@@ -51,7 +51,7 @@ _OK_
 
 </br>
 
-* Lancer votre VM 
+* Lancez votre VM 
 
 </br>
 
@@ -63,11 +63,11 @@ __Installation de Debian__
 
 </br>
 
-Verifier que le bon iso est utilisé 
+Verifiez que le bon iso est utilisé 
 
 <blockquote>Agrandir la fenetre avec l'onglet Video Memory - Virtual Screen : 300%
 
-Pour vous déplacer dans la VM utilisez TAB ou les fleches, afficher le mdp : espace, confirmer : enter </blockquote>
+Pour vous déplacer dans la VM utilisez TAB ou les flèches, pour afficher le mdp : espace, confirmer : enter </blockquote>
 
 Installation - Langue : comme vous voulez - Pays : Belgique (ou votre localisation) - Clavier : selon le votre (Etats-Unis à 42)
 
@@ -75,27 +75,27 @@ Configurer le réseau - Hostname/Nom de la machine : votrelogin suivi de 42, ex 
 
 Domaine : _rien_
 
-Choisir le mdp pour la partition root & le confirmer
+Choisissez le mdp pour la partition root & le confirmer
 
 Nom complet nouvel utilisateur : login - Identifiant pour le compteur utilisateur : login - Mdp du nouvel utilisateur : ce que vous voulez
 
 Partitionner les disques : Assisté - utiliser tout un disque avec LVM chiffré
 
-Selectionner le disque dur à partitionner (termine par VBOX HARDDISK)
+Selectionnez le disque dur à partitionner (termine par VBOX HARDDISK)
 
 Partitionner /home séparée - OUI
 
-Choisissez une chouette phrase secrete avec des chiffres, des lettres et des signes de ponctuation
+Choisissez une chouette phrase secrète avec des chiffres, des lettres et des signes de ponctuation
 
 Partitionner les disques : 7.5 GB
 
-<blockquote>Verifier que vous avez bien : Groupe de volumes LVM : un volume logique home, un autre root, un autre swap
+<blockquote>Vérifier que vous avez bien : Groupe de volumes LVM : un volume logique home, un autre root, un autre swap
 
 Sur votre disque dur : une partition primaire pour le boot et une autre partition logique, chiffrée</blockquote>
 
-Terminer le partitionnement et appliquer les changements - OUI
+Terminez le partitionnement et appliquer les changements - OUI
 
-Le systeme de base s'installe
+Le système de base s'installe
 
 Faut-il analyser un autre CD ou DVD ? - NON
 
@@ -107,7 +107,7 @@ Mandataire HTTP/Proxy : *vide*
 
 Etude statistique : NON
 
-Selection des logiciels : Cocher (avec espace) serveur SSH et utilitaires usuel du système, rien d'autre
+Séléction des logiciels : Cocher (touche espace) serveur SSH et utilitaires usuel du système, rien d'autre
 
 Installer le GRUB - Sur le /dev/sda ...
 
@@ -123,19 +123,19 @@ __SUDO__
 **Installation**
 
 
-Installer Sudo : `apt install sudo`
+Installez Sudo : `apt install sudo`
 
-Verifier que Sudo est bien installé : `dpkg -l | grep sudo`
+Vérifiez que Sudo est bien installé : `dpkg -l | grep sudo`
 
 **Ajout d'un utilisateur**
 
-Ajouter un utilisateur au groupe sudo (cet utilisateur pourra donc utiliser la commande sudo) : `adduser <username> sudo`
+Ajoutez un utilisateur au groupe sudo (cet utilisateur pourra donc utiliser la commande sudo) : `adduser <username> sudo`
 
-Verifier les utilisateurs du groupe sudo : `getent group sudo`
+Verifiez les utilisateurs du groupe sudo : `getent group sudo`
 
-Relancer la VM avec `reboot` pour que les changements prenent effet
+Relancez la VM avec `reboot` pour que les changements prenent effet
 
-Vérifier qui a bien les droits sudo avec la commande `sudo -v`
+Vérifiez qui bénéficie des droits sudo avec la commande `sudo -v`
 
 **Configuration de Sudo**
 
@@ -146,9 +146,9 @@ Pour modifier le fonctionnement de la commande sudo, l'administrateur du systèm
 
 Source : [Wiki Ubuntu-fr](https://doc.ubuntu-fr.org/sudoers)</blockquote>
 
-Créer un nouveau fichier pour configurer sudo avec `nano /etc/sudoers.d/<filename>`
+Créez un nouveau fichier pour configurer sudo avec `nano /etc/sudoers.d/<filename>`
 
-Ajouter les commandes suivantes :
+Ajoutez les commandes suivantes :
 
 Pour limiter les tentatives d'authentification à 3 dans le cas d'un mdp incorrecte :
 
@@ -196,41 +196,41 @@ l'installation d'UFW et mise en place du pare-feu sur [Digitalocean](https://www
 
 **Installation et parametrage SSH**
 
-Entrer votre phrase secrete
+Entrez votre phrase secrete
 
 Login : root - entrer le bon mdp
 
 <blockquote>Si vous vous etes trompé d'utilisateur vous pouvez switch avec la commande su telle que : su - root
 
-Nous serons log en root, les commandes suivantes n'auront donc pas besoin de sudo pour fonctionner</blockquote>
+Ici nous serons log en root, les commandes suivantes n'auront donc pas besoin de sudo pour fonctionner.</blockquote>
 
-* Lancer une maj des paquets : `apt-get update`
+* Lancez une maj des paquets : `apt-get update`
 
-* Verifier que le serveur ssh est bien installé : `apt-get install openssh-server`
+* Vérifiez que le serveur ssh est bien installé : `apt-get install openssh-server`
 
-Configurer dans nano afin que le serveur ssh soit actif uniquement sur le port 4242 : `nano /etc/ssh/sshd_config`
+Configurez dans nano afin que le serveur ssh soit actif uniquement sur le port 4242 : `nano /etc/ssh/sshd_config`
 
-Décommenter (-#) la ligne `#Port 22` et mettre : `Port 4242`
+Décommentez (-#) la ligne `#Port 22` et mettre : `Port 4242`
 
-Décommenter (-#) la ligne `#PermitRootLogin prohibit-password` et mettre : `PermitRootLogin no`
+Décommentez (-#) la ligne `#PermitRootLogin prohibit-password` et mettre : `PermitRootLogin no`
 
-Sortir du fichier avec Ctrl + X
+Sortez du fichier avec Ctrl + X
 
 <blockquote>Sauvegardez (Ecrire) bien votre fichier nano sinon vos modifications seront perdues</blockquote>
 
-Verifier le status SSH avec `service ssh status`
+Verifiez le status SSH avec `service ssh status`
 
-Relancer la VM avec `reboot`
+Relancez la VM avec `reboot`
 
 </br>
 
-**Se connecter du terminal de votre ordi via SSH**
+**Se connecter du terminal de votre ordi sur votre VM via SSH**
 
 Connaitre son IP : `ip a` 
 
 Ce qui se trouve après inet dans la partie 2
 
-Se connecter à votre VM via le port 4242 avec `ssh <username>@<ip-adress> -p 4242`
+Connectez vous à votre VM via le port 4242 avec `ssh <username>@<ip-adress> -p 4242`
 
 Pour sortir de la session : `logout`
 
@@ -238,19 +238,19 @@ Pour sortir de la session : `logout`
 
 **Installation du parefeu avec UFW**
 
-Installer ufw : `apt-get install ufw`
+Installez ufw : `apt-get install ufw`
 
-Activer le pare-feu : `ufw enable`
+Activez le pare-feu : `ufw enable`
 
-Bloquer toutes les connections venant de l'exterieur : `ufw default deny incoming`
+Bloquez toutes les connections venant de l'exterieur : `ufw default deny incoming`
 
-Permettre aux applications du serveurs d'avoir acces a l'exterieur :`ufw default allow outgoing`
+Permettez aux applications du serveurs d'avoir accès à l'extérieur :`ufw default allow outgoing`
 
-Configurer le pare-feu pour les connexions entrantes sur le port 4242 : `ufw allow 4242`
+Configurez le pare-feu pour les connexions entrantes sur le port 4242 : `ufw allow 4242`
 
-Verifier que tout est en ordre : `ufw status numbered`
+Vérifiez que tout est en ordre : `ufw status numbered`
 
-<blockquote>Si une des regles ne vous convient pas : `ufw delete [rule_nbr]`</blockquote>
+<blockquote>Si une des règles ne vous convient pas : `ufw delete [rule_nbr]`</blockquote>
 
 </br></br>
 
@@ -261,13 +261,17 @@ __Mise en place de la politique de mot de passe forte__
 
 </br>
 
-Installer libpam-pwquality et cracklib-runtime (permet de gerer la complexité des mdp) 
+Installez libpam-pwquality et cracklib-runtime (permet de gerer la complexité des mdp) :
 
-`apt-get -y install libpam-pwquality cracklib-runtime`
+```
+apt-get -y install libpam-pwquality cracklib-runtime
+```
 
-Modifier la durée à laquelle les mdp peuvent être changés dans le fichier /etc/login.defs (définit la configuration de la suite shadow password (mots de passe cachés) pour le système.) :
+Modifiez la durée à laquelle les mdp peuvent être changés dans le fichier /etc/login.defs (définit la configuration de la suite shadow password (mots de passe cachés) pour le système.) :
 
-`nano /etc/login.defs`
+```
+nano /etc/login.defs
+```
 
 Dans la section Password aging controls indiquer le nombre de jour max au bout duquel le mdp expirera :
 
@@ -279,7 +283,9 @@ Et le nombre de jour min entre deux modifications du mdp :
 
 Dans le fichier de configuration :
 
-`nano /etc/pam.d/common-password`
+```
+nano /etc/pam.d/common-password
+```
 
 Sur la ligne `password requisite pam_pwquality.so retry=3` ajouter les instructions suivantes :
 
@@ -301,26 +307,26 @@ Au final votre ligne ressemblera à :
 
 ```password        requisite                       pam_pwquality.so retry=3 minlen=10 ucredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root```
 
-Sur la ligne du dessous, apres pam_unix.so rajouter `remember=1` pour garder en memoire le dernier mot de passe utilisé et pouvoir le comparer lors de la creation d'un nouveau mdp.
+Sur la ligne du dessous, apres pam_unix.so rajouter `remember=1` pour garder en mémoire le dernier mot de passe utilisé et pouvoir le comparer lors de la creation d'un nouveau mdp.
 
 
 Créer un nouvel utilisateur :
 --
 
-Créer un nouvel utilisateur : `adduser <username>`
+Créez un nouvel utilisateur : `adduser <username>`
 
-Verifier qu'il a bien ete créer avec `getent passwd <username>`
+Vérifiez qu'il a bien été créé avec `getent passwd <username>`
 
-Verifier le temps de validité des mots de passe grace à `sudo chage -l <username>`
+Vérifiez le temps de validité des mots de passe grace à `sudo chage -l <username>`
 
 Créer un nouveau groupe :
 --
 
-Créer un nouveau groupe nommé `user42`
+Créez un nouveau groupe nommé `user42`
 
-Ajouter votre nouveau membre à ce groupe avec `adduser <username> user42`
+Ajoutez votre nouveau membre à ce groupe avec `adduser <username> user42`
 
-Verifier que l'user a bien ete ajouté au groupe user 42 avec `getent group user42`
+Verifiez que l'user a bien été ajouté au groupe user 42 avec `getent group user42`
 
 </br></br>
 
@@ -331,9 +337,9 @@ __AppArmor__
 
 Normalement installé par défaut, vous pouvez le télécharger avec `apt install apparmor`
 
-Completer l'installation avec `apt install apparmor-utils`
+Complètez l'installation avec `apt install apparmor-utils`
 
-Vérifier que le module apparmor fonctionne avec `/usr/sbin/aa-status` ou `apparmor_status`
+Vérifiez que le module apparmor fonctionne avec `/usr/sbin/aa-status` ou `apparmor_status`
 </br>
 
 __SCRIPT__
@@ -341,11 +347,11 @@ __SCRIPT__
 
 *Plus d'infos sur le shell sur [Doc-Ubuntu](https://doc.ubuntu-fr.org/projets/ecole/scripting/initiation_au_shell) et le regex sur [Regexr](https://regexr.com/), allez checker le man pour uname, lscpu, awk ... vous pouvez aussi cat les différents fichiers /proc pour voir ce qui vous interesse dans leur contenu*
 
-Créer un fichier monitoring.sh
-
+Créez un fichier monitoring.sh
+```
 nano monitoring.sh
-
-Exemple de script pour un terminal **en anglais**, si vous êtes en français ou une autre langue certaines termes changeront.
+```
+Exemple de script pour **un terminal en anglais**, si vous êtes en français ou une autre langue certaines termes changeront.
 
 ```
 #!/bin/bash
@@ -447,9 +453,9 @@ __CRON__
 
 </br>
 
-Ouvrir le fichier crontab avec `crontab -e`, choisir Nano
+Ouvrez le fichier crontab avec `crontab -e`, choisir Nano
 
-Remplacer la ligne 
+Remplacez la ligne 
 ```
 m h  dom mon dow   command
 ``` 
@@ -465,7 +471,9 @@ Votre script s'activera alors toutes les 10min.
 
 </br></br></br>
 
-Tout verifier : service --status-all
+Tout vérifier : service --status-all
+
+
 __Sources__
 ----
 https://www.cyberciti.biz/faq/ubuntu-change-hostname-command/
