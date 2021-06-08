@@ -339,19 +339,19 @@ Vérifier que le module apparmor fonctionne avec `/usr/sbin/aa-status` ou `appar
 __SCRIPT__
 --
 
-*Plus d'infos sur le shell sur [Doc-Ubuntu](https://doc.ubuntu-fr.org/projets/ecole/scripting/initiation_au_shell), allez checker le man pour uname, lscpu, awk ... vous pouvez aussi cat les différents fichiers /proc pour voir ce qui vous interesse dans leur contenu*
+*Plus d'infos sur le shell sur [Doc-Ubuntu](https://doc.ubuntu-fr.org/projets/ecole/scripting/initiation_au_shell) et le regex sur [Regexr](https://regexr.com/), allez checker le man pour uname, lscpu, awk ... vous pouvez aussi cat les différents fichiers /proc pour voir ce qui vous interesse dans leur contenu*
 
 Créer un fichier monitoring.sh
 
 nano monitoring.sh
 
-Exemple de script:
+Exemple de script pour un terminal **en anglais**, si vous êtes en français ou une autre langue certaines termes changeront.
 
 ```
 #!/bin/bash
 
 
-MEMTOTAL=$(awk '/MemTotal/ {print $2}' /proc/meminfo)
+MEMTOTAL=$(awk '/MemTotal/ {print $2}' /proc/meminfo) 
 
 MEMAVAIL=$(awk '/MemAvail/ {print $2}' /proc/meminfo)
 
@@ -395,6 +395,51 @@ End_Of_Message
 ```
 </br></br>
 
+Qui va fonctionner ainsi :
+
+MEMTOTAL : recup la memoire totale
+
+MEMAVAIL : recup la memoire non utilisée
+
+MEMUSED : Calcul la memoire utilisée
+
+LVM : Recupere le type de partition de /root/, qui devrait etre lvm
+
+
+wall << End_Of_Message : envoie le message (tout ce qui suit jusqu'à End_Of_Message) dans la commande wall qui le fera s'afficher sur tous les terminaux actifs 
+
+#Architecture: `uname -a` : recup l'ensemble des infos de votre OS
+
+#CPU physical: `lscpu | awk '/^CPU\(s\)/ {print $2}'` : recup dans lscpu la 2eme colone de la ligne qui commence par CPU(s)
+
+#vCPU : `grep -c 'processor' /proc/cpuinfo` : recup dans cpuinfo l'identifiant du CPU 
+
+`echo $MEMUSED $MEMTOTAL | awk '{printf "#Memory Usage: %d/%dMB (%.2f%%)\n", ($1/1024), ($2/1024), ($1/$2)*100}'` : recup les valeurs de MEMUSED et MEMTOTAL, les convertit en MB ( /1024), en fait un % qui est exprimé en float a 2 decimal pret grace à (%.2f%%)
+
+`df --total | tail -n 1 | awk '{printf "#Disk Usage: %d/%dGb (%d%%)\n", ($3/1024), ($2/1048576), $5}'` : recup dans df --total | la derniere ligne | afficher la memoire utilisee dans la 3eme colonne (/en MB) sur la memoire totale dans la 2eme colonne (/en GB) et le pourcentage total de mem utilisé, dans la 5eme colonne
+
+`awk '{print "#CPU load: "$1"%\n"}' /proc/loadavg` : recup dans /proc/loadavg l'utilisation actuelle du CPU + %
+
+#Last boot: `who -b | awk '{print $3" "$4}'` recup dans who les col. 3 et 4 : la date et l'heure
+
+#LVM use: `if [ "$LVM" = "lvm" ]; 	: Compare votre type de partition(LVM) avec lvm et renvoie oui ou non 
+then
+echo "yes"
+else
+echo "no"
+fi`
+
+`awk '$4=="01" {count++} END{printf "#Connexions TCP : %d ESTABLISHED\n", count}' /proc/net/tcp`  : recup le nombre de connection TCP en comptant dans la col. 4 du /proc/net/tcp le nb de 01
+
+#User log: `who | awk '{print $1}' | uniq | wc -l` : recup dans who la premiere colonne, une seule fois par utilisateur
+
+`ip -br a show $(ip route show default | awk '{print $5}') | sed 's/\/[[:digit:]]\{1,3\}//g' | awk '{printf "#Network: IP %s (%s)\n", $3, $4}'` : recup l'adresse ipV4 et l'adresse MAC avec ip a | grep link/ether | awk 'print $2'
+
+`grep -c 'COMMAND' /var/log/sudo/sudo.log | awk '{printf "#Sudo : %d cmd\n", $1}'` 
+
+End_Of_Message
+
+
 __CRON__
 -----------------------------------------------
 
@@ -419,6 +464,8 @@ Votre script s'activera alors toutes les 10min.
 </br></br>
 
 </br></br></br>
+
+Tout verifier : service --status-all
 __Sources__
 ----
 https://www.cyberciti.biz/faq/ubuntu-change-hostname-command/
@@ -431,7 +478,10 @@ https://www.redhat.com/fr/topics/linux/what-is-selinux
 
 https://doc.ubuntu-fr.org/lvm
 
+
+
 </br></br></br></br></br></br></br></br></br></br></br></br>
+
 _______________________________________________________________________________________________________________________
 Ce projet a pour but de vous faire découvrir le merveilleux monde de la virtualisation.
 Vous allez créer votre première machine en respectant des consignes précises et en
