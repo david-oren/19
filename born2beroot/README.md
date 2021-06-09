@@ -111,8 +111,11 @@ Séléction des logiciels : Cocher (touche espace) serveur SSH et utilitaires us
 
 Installer le GRUB - Sur le /dev/sda ...
 
-Continuer
+Continuer - La VM se relance
 
+Entrez votre phrase secrete
+
+Login : root - entrer le bon mdp
 </br></br>
 
 __SUDO__
@@ -120,8 +123,9 @@ __SUDO__
 
 *Plus d'infos sur Sudo sur [Wiki.Debian](https://wiki.debian.org/fr/sudo)*
 
-**Installation**
+</br>
 
+**Installation**
 
 Installez Sudo : `apt install sudo`
 
@@ -162,7 +166,7 @@ Pour ajouter un message d'erreur personnalisé :
 Defaults        badpass_message="<custom-error-message>"
 ```
 
-Enregistrer l'activité des sudoers dans un fichier de log spécifique :
+Enregistrer l'activité des sudoers dans un fichier de log spécifique (pensez à bien créer ce fichier par la suite):
 
 ```
 Defaults        log_host, log_year, logfile="/var/log/sudo/<filename>"
@@ -196,14 +200,6 @@ l'installation d'UFW et mise en place du pare-feu sur [Digitalocean](https://www
 
 **Installation et parametrage SSH**
 
-Entrez votre phrase secrete
-
-Login : root - entrer le bon mdp
-
-<blockquote>Si vous vous etes trompé d'utilisateur vous pouvez switch avec la commande su telle que : su - root
-
-Ici nous serons log en root, les commandes suivantes n'auront donc pas besoin de sudo pour fonctionner.</blockquote>
-
 * Lancez une maj des paquets : `apt-get update`
 
 * Vérifiez que le serveur ssh est bien installé : `apt-get install openssh-server`
@@ -224,15 +220,15 @@ Relancez la VM avec `reboot`
 
 </br>
 
-**Se connecter du terminal de votre ordi sur votre VM via SSH**
+##**Se connecter du terminal de votre ordi sur votre VM via SSH**
 
-Connaitre son IP : `ip a` 
+Connaitre son IP dans la VM : `ip a` 
 
 Ce qui se trouve après inet dans la partie 2
 
 Connectez vous à votre VM via le port 4242 avec `ssh <username>@<ip-adress> -p 4242`
 
-Pour sortir de la session : `logout`
+Pour sortir de la session : `logout`## A VERIF
 
 </br>
 
@@ -291,7 +287,7 @@ Sur la ligne `password requisite pam_pwquality.so retry=3` ajouter les instructi
 
 `difok=7`    Nombre de caractères du nouveau mot de passe qui ne sont pas présents dans l'ancien, par défaut difok=1
 
-`minlen=10`    Taille minimum du nouveau mot de passe. Cependant un bonus d'un caractère en plus est rajouté si un type de caractères différent de plus est présent dans le mot de passe. **?**
+`minlen=10`    Taille minimum du nouveau mot de passe. Cependant un bonus d'un caractère en plus est rajouté si un type de caractères différent de plus est présent dans le mot de passe.
 
 `dcredit=-1`    Si dcredit < 0, dcredit est l'opposé du nombre minimum de chiffres dans le nouveau mot de passe, exemple si dcredit = -5, il faut au moins 5 chiffres dans le mot de passe.
 
