@@ -2,6 +2,9 @@
 
 </br>
 
+**Tuto encore en phase de redaction : les grandes lignes sont là mais il peut encore rester des imprecisions ou autres, comprenez ce que vous faites ;)
+**
+
 Ce projet a pour but de vous faire découvrir le merveilleux monde de la virtualisation.
 
 Vous allez créer votre première machine en respectant des consignes précises et en
