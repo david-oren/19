@@ -10,4 +10,4 @@
 * [printf](printf/)
 * [exam_rank_02](exam_rank_02/)
 * [fractol](fractol/)
-* [push swap](push swap/)
+* [push_swap](push_swap/)
