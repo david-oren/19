@@ -9,3 +9,5 @@
 * [born2beroot](born2beroot/)
 * [printf](printf/)
 * [exam_rank_02](exam_rank_02/)
+* [fractol](fractol/)
+* [push swap](push swap/)
