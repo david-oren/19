@@ -2,8 +2,9 @@
 
 </br>
 
-**Tuto encore en phase de redaction : les grandes lignes sont là mais il peut encore rester des imprecisions ou autres, comprenez ce que vous faites ;)
-**
+
+**Ce tuto vous expliquera dans les grande lignes le projet, il n'a pas pour but d'être exhaustif : faites vos recherches et comprenez toujours ce que vous faites. Bon courage !**
+
 
 Ce projet a pour but de vous faire découvrir le merveilleux monde de la virtualisation.
 
@@ -13,7 +14,7 @@ utilisant VirtualBox (ou UTM si VirtualBox ne fonctionne pas sur votre machine).
 Ainsi, à la suite de ce projet, vous serez capable d’installer votre propre système d’exploitation
 implémentant des règles strictes.
 
-Lien pour [le pdf de correction](https://github.com/secondfry/school21-checklists/blob/8ccdcbee157c228a87057833cd9d63390fd36c3d/ng_1_born2beroot.pdf)
+Lien pour [le pdf de correction](https://github.com/secondfry/school21-checklists/blob/8ccdcbee157c228a87057833cd9d63390fd36c3d/ng_1_born2beroot.pdf).
 
 Pour les manipulations demandées durant la correction, voir la fin du tuto.
 </br>
@@ -21,7 +22,7 @@ Pour les manipulations demandées durant la correction, voir la fin du tuto.
 ___Mise en place de votre VM___
 --------------------------------
 
-*Plus d'infos sur les fichiers systemes sous Linux sur [How To Geek](https://www.howtogeek.com/howto/33552/htg-explains-which-linux-file-system-should-you-choose/) et la mise en place des partitions (page un peu vieille) sur [Developpez.com] (https://linux.developpez.com/formation_debian/partitionner.html)*
+*Plus d'infos sur les fichiers systemes sous Linux sur [How To Geek](https://www.howtogeek.com/howto/33552/htg-explains-which-linux-file-system-should-you-choose/) et la mise en place des partitions (page un peu vieille) sur [Developpez.com](https://linux.developpez.com/formation_debian/partitionner.html)*
 </br>
 
 * Téléchargez la version stable de [Debian](https://www.debian.org/)
@@ -66,7 +67,7 @@ __Installation de Debian__
 ------------------------------------
 
 *Plus d'infos sur [Debian-handbook](https://debian-handbook.info/browse/fr-FR/stable/sect.installation-steps.html) et 
-[Doc.Ubuntu](https://doc.ubuntu-fr.org/lvm) et sur la *
+[Doc.Ubuntu](https://doc.ubuntu-fr.org/lvm) et sur la connection via SSH sur [OpenClassRoom](https://openclassrooms.com/fr/courses/43538-reprenez-le-controle-a-laide-de-linux/41773-la-connexion-securisee-a-distance-avec-ssh)*
 
 </br>
 
@@ -223,19 +224,29 @@ Sortez du fichier avec Ctrl + X
 
 Verifiez le status SSH avec `service ssh status`
 
-Relancez la VM avec `reboot`
+Connaitre son IP dans la VM : `ip a` 
+
+Notez dans un coin ce qui se trouve après le premier inet, ainsi que la seconde adresse ip un peu plus loin
+
+
+Allez dans les settings de votre VM (sur virtualBox) - Advanced - Port Forwarding
+
+Dans le Host IP, mettez la premiere adresse ip, Host Port : 4242
+
+Dans le Guest IP : la seconde adresse ip, Host port : 4242
+
+Ok, Ok
+
+Relancez la VM 
 
 </br>
 
 ##**Se connecter du terminal de votre ordi sur votre VM via SSH**
 
-Connaitre son IP dans la VM : `ip a` 
-
-Ce qui se trouve après inet dans la partie 2
 
 Connectez vous à votre VM via le port 4242 avec `ssh <username>@<ip-adress> -p 4242`
 
-Pour sortir de la session : `logout`## A VERIF
+Pour sortir de la session : `logout`
 
 </br>
 
@@ -444,7 +455,7 @@ fi`
 
 `ip -br a show $(ip route show default | awk '{print $5}') | sed 's/\/[[:digit:]]\{1,3\}//g' | awk '{printf "#Network: IP %s (%s)\n", $3, $4}'` : recup l'adresse ipV4 et l'adresse MAC avec ip a | grep link/ether | awk 'print $2'
 
-`grep -c 'COMMAND' /var/log/sudo/sudo.log | awk '{printf "#Sudo : %d cmd\n", $1}'` 
+`grep -c 'COMMAND' /var/log/sudo/<name of the file where you put the activity of sudo> | awk '{printf "#Sudo : %d cmd\n", $1}'` 
 
 End_Of_Message
 
@@ -487,7 +498,7 @@ diff <(echo “string 1”) <(echo “string2”)
 
 Vous devez savoir expliquer :
 
-- comment fonctionne une machine virtuelle et son but
+- Comment fonctionne une machine virtuelle et son but
 
 - Votre choix entre CentOs et Debian
 
@@ -525,11 +536,12 @@ cut -d: -f1 /etc/passwd
 ```
 
 How set up rules for passwords : modified file :  
+```
+nano /etc/login.defs (aging of the passwords)
+				
+nano /etc/pam.d/common-password (pam : library allows root to authenticate users) (difok : number of char that need to be new ones / dcredit : digit / ucredit : majuscule / maxrepeat : repetition of chars / reject_username )
+```
 
-				nano /etc/login.defs (aging of the passwords)
-				
-				nano /etc/pam.d/common-password (pam : library allows root to authenticate users) (difok : number of char that need to be new ones / dcredit : digit / ucredit : majuscule / maxrepeat : repetition of chars / reject_username )
-				
 Create a new group : 	
 ```
 sudo groupadd evaluating 
@@ -567,6 +579,7 @@ ufw status numbered
 
 ufw delete [rule_nbr]
 ```
+Warning : you need to delete two rules : the one for income and outgoing
 ——————————————————————————————————————————————————————————
 
 Check sudo is properly installed : 
@@ -615,9 +628,9 @@ Use ssh in order to log in with the created user :
 	
  ip a : take first ip address : 127.0.0.1
 	
- sudo passwd <newuser>
+ sudo passwd <user>
 	
-ssh <newuser>@127.0.0.1 -p 4242
+ssh <user>@127.0.0.1 -p 4242
 	
 logout
 	
@@ -625,9 +638,7 @@ logout
 	
 Explain you operation of script by displaying it : 
 	
-cd ..
-	
-cd ..
+cd (to wherever you put your script)
 	
 ```
 	sudo nano ./monitoring.sh
@@ -668,18 +679,14 @@ sudo bash monitoring.sh
 	
 Cron : Programm that allows users to execute scripts, commands or programs at a date/hour specified in advance or according to a specific cycle.
 	
-Ensure script runs every 30s / every 10 minutes. Make the script stop running when the server starts up.
+Ensure script runs every 1min / every 10 minutes. Make the script stop running when the server starts up.
 	
-
+the pdf will ask to launch the script every minute : 
 sudo crontab -e
 ```	
  * * * * * sh /monitoring/monitoring.sh
-	
- * * * * * sleep 30; sh /monitoring/monitoring.sh
 ```	
-comment the Iines
-	
-sudo /etc/init.d/crond stop
+comment the line with the ****s to desactivate the launch of the script
 	
 ——————————————————————————————————————————————————————
 	
@@ -699,202 +706,3 @@ https://debian-handbook.info/browse/fr-FR/stable/sect.apparmor.html
 https://www.redhat.com/fr/topics/linux/what-is-selinux
 
 https://doc.ubuntu-fr.org/lvm
-
-
-
-</br></br></br></br></br></br></br></br></br></br></br></br>
-
-_______________________________________________________________________________________________________________________
-Ce projet a pour but de vous faire découvrir le merveilleux monde de la virtualisation.
-Vous allez créer votre première machine en respectant des consignes précises et en
-utilisant VirtualBox (ou UTM si VirtualBox ne fonctionne pas sur votre machine). Ainsi,
-à la suite de ce projet, vous serez capable d’installer votre propre système d’exploitation
-implémentant des règles strictes.
-
-Install 
-Telecharge version stable:
-https://www.debian.org/
-
-VM:
-Nouvelle: ok pour tous
-Config: reseau --> acces par pont
-Stockage --> Debian --> choisir iso debian
-
-Lancer Debian:
-
-1. instalation
-Suivre les etapes d installation
-Nom de la machine --> login42
-domain --> enter
-choisir mot de passe root
-nom complet nouvel utilisateur: login
-choisir mot de passe user
-partion: Assiste chiffre --> partion /home separe --> ecrire modif oui 
-Quantite d espace 7.5 GB
-terminer le partionenement --> oui et faut il analyser un autre cd non
-Belgique --> debian --> enter
-Aller sur serveur ssh et faite enter
-installer grub et choisir /dev/sda......
-Connectez vous en root
-
-SSH
-apt-get update
-apt-get install openssh-server
-nano /etc/ssh/sshd_config
-#Port 22 --> Port 4242
-#PermitRootLogin prohibit-password --> PermitRootLogin yes 
-
-UFW
-apt-get install ufw
-sudo ufw enable
-sudo ufw default deny incoming
-sudo ufw default allow outgoing
-sudo ufw allow 4242
-Puis pour check
-sudo ufw status
-
-groupe user
-Cet utilisateur appartiendra aux groupes user42 et sudo --> usermod -a -G examplegroup exampleusername
-
-Un utilisateur sera présent avec pour nom votre login en plus de l’utilisateur root.
-
-
-Politique de mot de passe forte:
-apt-get -y install libpam-pwquality cracklib-runtime
-
-nano /etc/login.defs
---> PASS_MAX_DAYS 30
---> PASS_MIN_DAYS 2
-
-nano /etc/pam.d/common-password
-difok=N    Nombre de caractères du nouveau mot de passe qui ne sont pas présents dans l'ancien, par défaut difok=1
-minlen=N    Taille minimum du nouveau mot de passe. Cependant un bonus d'un caractère en plus est rajouté si un type de caractères différent de plus est présent dans le mot de passe.
-dcredit=N    Si dcredit < 0, dcredit est l'opposé du nombre minimum de chiffres dans le nouveau mot de passe, exemple si dcredit = -5, il faut au moins 5 chiffres dans le mot de passe.
-ucredit=N    Si ucredit < 0, ucredit est l'opposé du nombre minimum de lettres majuscules dans le nouveau mot de passe, exemple si ucredit = -4, il faut au moins 4 lettres majuscules dans le mot de passe
-maxrepeat=N    Si maxrepeat=N, alors un caractère ne pourra pas être présent plus de N fois
-
-Cron:
-crontab -e select nano
---> rajouter une derniere ligne pour que le script s active toute les dix minutes
-*/10 * * * * bash monitoring.sh
-
-Sudo:
-apt-get install sudo
-nano /etc/sudoers
-rajouter:
-DEFAULT	passwd_tries=3  --> L’authentification en utilisant sudo sera limitée à 3 essais en cas de mot de passe erroné.
-DEFAULT	badpass_message="bouh" --> • Un message de votre choix s’affichera en cas d’erreur suite à un mauvais mot de passe lors de l’utilisation de sudo.
-DEFAULT	logfile="/var/log/sudo" --> Le journal se trouvera dans le dossier /var/log/sudo/.
-DEFAULT	log_input,log_output --> • Chaque action utilisant sudo sera archivée, aussi bien les inputs que les outputs.
-DEFAULT	requiretty --> Le mode TTY sera activé pour des questions de sécurité.
-
-
-usercheck=N    Si usercheck est différent de 0, vérifie si le mot de passe contient le nom de l'utilisateur $USER. Cette vérification n'est pas effectuée pour les noms d'utilisateur de moins de 3 caractères.
-enforce_for_root Forcer sur le root
-
-pour changer de user:
-su - username
-SCRIPT
-
-Creer un fichier monitoring.sh
-nano monitoring.sh
-Exemple de script:
-
-#!/bin/bash
-var=`lvdisplay`
-
-wall << End_Of_Message
-        #Architecture: `uname -a`
-        #CPU physical : `grep -c ^processor /proc/cpuinfo`
-        #vCPU : `cat /proc/cpuinfo | grep processor | wc -l`
-        `free -m | awk 'NR==2{printf "#Memory Usage: %s/%sMB (%.2f%%)\n", $3,$2,$3*100/$2 }'`
-        `df -h | awk '$NF=="/"{printf "#Disk Usage: %.2f/%dGb (%s)\n", $3,$2,$5}'`
-        #CPU load: `top -bn1 | grep load | awk '{printf "%.1f%%\t\t\n", $(NF-2)}'`
-        #Last boot:`who -b |  cut -d 't' -f 3`
-        #LVM use: `if [ -z "$var" ]; then
-                echo "no"
-        else
-                echo "yes"
-        fi`
-        #Connexions TCP :  `sed  </proc/net/tcp '/^ *[0-9]\+: [0-9A-F: ]\{27\} 01 /p;d' | wc -l` ESTABLISHED
-        #User log: `who | cut -d " " -f 1 | sort -u | wc -l`
-        #Network: IP `ip -4 addr show enp0s3 | awk '/inet/ {print $2}' | sed 's#/.*##'` (`cat /sys/class/net/$(ip route show default | awk '/default/ {print $5}')/address`)
-        #Sudo : `grep -o -i COMMAND /var/log/sudo | wc -l` cmd
-End_Of_Message
-
-Verification
-Partion: lsblk
-ufw: ufw status
-groups: groups usernam
-
-Rendu:
-Aller dans le dossier de la vm chercher le hash
-
-
-Source
-https://www.cyberciti.biz/faq/ubuntu-change-hostname-command/
-https://doc.ubuntu-fr.org/useradd
-https://debian-handbook.info/browse/fr-FR/stable/sect.apparmor.html
-https://www.redhat.com/fr/topics/linux/what-is-selinux
-https://doc.ubuntu-fr.org/lvm
-
-
-
-apt-get install sudo
-sudo apt-get update
-sudo apt-get upgrade
-/*-------------------------*/
-#CREATE AN USER | ADD TO GROUP
-
-sudo adduser <user_name>
-sudo groupadd <group_name>
-sudo adduser <user_name> <group_name>
-cat /etc/group
-/*-------------------------*/
-#THE PASSWORDS
-
-man chage
-chage -M 30 <user>
-chage -W 7 <user>
-chage -m 2 <user>
-chage --list <user>
-passwd (change password)
-/*-------------------------*/
-#PASSWORDS COMPLEXITY
-
-sudo apt-get install libpam-cracklib
-man pam_cracklib
-vim /etc/pam.d/commom-passowrd
-minlen=10
-ucredit=-1
-dcredit=-1
-maxrepeat=3
-reject_username
-difok=7
-/*-------------------------*/
-#SUDO CONFIG
-
-man sudoers
-vim /etc/sudoers
-Defaults	badpass_message="<message>"
-/*-------------------------*/
-#INSTALL UFW
-
-sudo apt-get install ufw
-sudo ufw allow 4242
-sudo ufw enable
-sudo ufw delete [rule_nbr]
-sudo ufw status numbered
-/*-------------------------*/
-#INSTALL SSH
-
-sudo apt install openssh-server
-cd /etc/ssh et mettre le port à 4242 et no à login_with_root dans le fichier sshd_config
-sudo ufw allow ssh
-ssh -V
-/*-------------------------*/
-#INSTALL APPARMOR
-
-sudo apt-get install apparmor
-apt-get install apparmor-utils
-sudo apparmor_status
