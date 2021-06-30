@@ -13,18 +13,22 @@ utilisant VirtualBox (ou UTM si VirtualBox ne fonctionne pas sur votre machine).
 Ainsi, à la suite de ce projet, vous serez capable d’installer votre propre système d’exploitation
 implémentant des règles strictes.
 
+Lien pour [le pdf de correction](https://github.com/secondfry/school21-checklists/blob/8ccdcbee157c228a87057833cd9d63390fd36c3d/ng_1_born2beroot.pdf)
+
+Pour les manipulations demandées durant la correction, voir la fin du tuto.
 </br>
 
 ___Mise en place de votre VM___
 --------------------------------
 
+*Plus d'infos sur les fichiers systemes sous Linux sur [How To Geek](https://www.howtogeek.com/howto/33552/htg-explains-which-linux-file-system-should-you-choose/) et la mise en place des partitions (page un peu vieille) sur [Developpez.com] (https://linux.developpez.com/formation_debian/partitionner.html)*
 </br>
 
 * Téléchargez la version stable de [Debian](https://www.debian.org/)
 
 Elle se présente sous la forme d'une image CD : un .iso que l'on va monter par la suite dans notre machine virtuelle.
 
-Si vous souhaitez faire les bonus vous pouvez suivre cette installation ci, faites par [hanshazairi](https://github.sre.pub/hanshazairi/42-born2beroot/blob/main/README.md) : [ici](https://www.youtube.com/watch?v=2w-2MX5QrQw)
+**Si vous souhaitez faire les bonus** vous pouvez suivre cette installation ci, faites par [hanshazairi](https://github.sre.pub/hanshazairi/42-born2beroot/blob/main/README.md) : [ici](https://www.youtube.com/watch?v=2w-2MX5QrQw)
 
 </br>
   
@@ -62,7 +66,7 @@ __Installation de Debian__
 ------------------------------------
 
 *Plus d'infos sur [Debian-handbook](https://debian-handbook.info/browse/fr-FR/stable/sect.installation-steps.html) et 
-[Doc.Ubuntu](https://doc.ubuntu-fr.org/lvm)*
+[Doc.Ubuntu](https://doc.ubuntu-fr.org/lvm) et sur la *
 
 </br>
 
@@ -466,11 +470,222 @@ par
 
 Votre script s'activera alors toutes les 10min.
 
-</br></br>
-
-</br></br></br>
+</br>
 
 Tout vérifier : service --status-all
+
+</br>
+
+__Correction__
+----
+</br>
+Comparaison de la signature de votre machine virtuelle et de celle que vous avez soumise : 
+
+```
+diff <(echo “string 1”) <(echo “string2”)
+```
+
+Vous devez savoir expliquer :
+
+- comment fonctionne une machine virtuelle et son but
+
+- Votre choix entre CentOs et Debian
+
+- Si vous avez choisis Debian : la difference entre apt et Aptitude et ce qu'est APPArmor
+
+- Si vous avez choisis CentOs : ce qu'est SELinux et DNF
+
+Durant la defense votre script devra tourner et afficher les infos voulues sur vos terminaux.
+
+Connectez vous sur un compte user, autre que root, avec le bon mdp.
+
+Vérifiez que le service UFW tourne : 
+```
+sudo ufw status verbose OU sudo ufw status numbered
+```
+
+Vérifiez que le service SSH tourne aussi :
+```
+sudo service ssh status
+```
+Vérifiez le systeme d'exploitation :
+```
+uname -a 
+```
+
+Vérifiez a quel groupes appartient le user : ```groups```
+
+Create a new user : 
+```
+sudo useradd 
+```
+List different users : 
+```
+cut -d: -f1 /etc/passwd
+```
+
+How set up rules for passwords : modified file :  
+
+				nano /etc/login.defs (aging of the passwords)
+				
+				nano /etc/pam.d/common-password (pam : library allows root to authenticate users) (difok : number of char that need to be new ones / dcredit : digit / ucredit : majuscule / maxrepeat : repetition of chars / reject_username )
+				
+Create a new group : 	
+```
+sudo groupadd evaluating 
+
+sudo adduser new evaluating 
+					
+sudo getent group evaluating
+```
+					
+Advantages of password policy
+—————————————————————————————————————————————————————————
+
+Check hostname : sudo hostname
+
+Modify hostname and reboot : 
+```
+				sudo nano /etc/hostname
+				sudo nano /etc/hosts
+				sudo reboot
+```
+				
+View partitions : 
+```
+sudo lsblk
+```
+LVM : disk management tool : physical volume (hardware), volume groups : VM and then can divide again : logical volumes : same as doing partitions to a physical ask but inside VM. LVM : allows you to do these divisions. (Flexible in size)
+
+———————————————————————————————————————————————————————————
+
+UFW : 
+```
+ufw allow 8080
+
+ufw status numbered
+
+ufw delete [rule_nbr]
+```
+——————————————————————————————————————————————————————————
+
+Check sudo is properly installed : 
+```
+sudo dpkg -l | grep sudo
+```
+
+Assign new user to sudo : 
+```
+sudo adduser <username> sudo
+```
+
+Check : 
+```
+sudo getent group sudo
+```
+	
+Rules for sudo : authentication : 3 attempts, cannot connect with ssh with sudo, paths used by sudo restricted
+	
+Verify /var/log/sudo folder exist, has one file : sudoers_activity, has history of commands with sudo. Make command : sudo lsblk, should have been updated.
+	
+```
+nano /etc/sudoers.d/myconfig
+```
+	
+( sudo nano /etc/sudoers.d/myconfig)
+	
+( sudo nano /var/log/sudo/sudoers_activity)
+	
+——————————————————————————————————————————————————————————
+	
+Check SSH is installed : ```sudo ssh -V```
+	
+What is ssh and value of using it : network protocol, secure way to access a computer over a network. Keys and encrypted communication. Enable to log to the computers through network
+	
+Config file : 
+```
+nano /etc/ssh/sshd_config
+```
+Check ssh uses only the port 4242 : 
+```
+sudo cat /etc/ssh/sshd_config | grep Port
+```
+	
+Use ssh in order to log in with the created user : 
+	
+ ip a : take first ip address : 127.0.0.1
+	
+ sudo passwd <newuser>
+	
+ssh <newuser>@127.0.0.1 -p 4242
+	
+logout
+	
+—————————————————————————————————————————————————————————
+	
+Explain you operation of script by displaying it : 
+	
+cd ..
+	
+cd ..
+	
+```
+	sudo nano ./monitoring.sh
+```
+Script : 
+	
+_ Memtotal : récupère la memoire, Memavail : recupere la memoire non utilisée, Bemused : difference
+	
+_LVM : type partition de root
+	
+_wall << End_Of_Message : career un message qui s’affiche dans les terminaux actifs
+	
+_Architecture : recupere informations OS
+	
+_CPU physical : recupere lscpu 
+	
+_vCPU : recupere cpuinfo
+	
+_echo $MEMUSED $ MEMTOTAL … : recupere les valeurs de mémoire, les convertit en MB
+	
+_df …. : affiche la mémoire utilisée et le pourcentage de memoire 
+	
+_awk… : recupere l’utilisation CPU
+	
+_Last boot
+	
+_LVM use
+	
+_awk.. : nombre de connections TCP
+	
+_user log 
+	
+_ip -br : adresse ipV4
+	
+_nombre de commandes effectuées par sudo 
+	
+sudo bash monitoring.sh
+	
+Cron : Programm that allows users to execute scripts, commands or programs at a date/hour specified in advance or according to a specific cycle.
+	
+Ensure script runs every 30s / every 10 minutes. Make the script stop running when the server starts up.
+	
+
+sudo crontab -e
+```	
+ * * * * * sh /monitoring/monitoring.sh
+	
+ * * * * * sleep 30; sh /monitoring/monitoring.sh
+```	
+comment the Iines
+	
+sudo /etc/init.d/crond stop
+	
+——————————————————————————————————————————————————————
+	
+shasum born2beroot 
+	
+goinfre_born2beroot.vdi 
 
 
 __Sources__
