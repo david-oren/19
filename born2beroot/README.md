@@ -392,7 +392,7 @@ wall << End_Of_Message
 
     `df --total | tail -n 1 | awk '{printf "#Disk Usage: %d/%dGb (%d%%)\n", ($3/1024), ($2/1048576), $5}'`
 
-    `awk '{print "#CPU load: "$1"%\n"}' /proc/loadavg`
+    `awk '{print "#CPU load: "$1"%\n"}' /proc/loadavg*100`
 
     #Last boot: `who -b | awk '{print $3" "$4}'`
 
